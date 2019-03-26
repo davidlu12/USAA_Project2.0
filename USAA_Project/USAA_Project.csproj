@@ -84,6 +84,8 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="HtmlPage.html" />
+    <Content Include="JavaScript.js" />
+    <Content Include="Style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
