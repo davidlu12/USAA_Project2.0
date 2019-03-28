@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FeedbackListPage.html" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage.html" />
     <Content Include="JavaScript.js" />
