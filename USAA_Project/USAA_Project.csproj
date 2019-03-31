@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccountServices.asmx" />
+    <Content Include="Departments.html" />
     <Content Include="FeedbackListPage.html" />
     <Content Include="FeedbackListServices.asmx" />
     <Content Include="Global.asax" />
