@@ -24,7 +24,7 @@ namespace USAA_Project
     {
 
         [WebMethod]
-        public FeedbackList[] GetList()
+        public Questions[] GetList()
         {
             DataTable sqlDt = new DataTable("lists");
 
@@ -42,16 +42,15 @@ namespace USAA_Project
             //loop through each row in the dataset, creating instances
             //of our container class Account.  Fill each acciount with
             //data from the rows, then dump them in a list.
-            List<FeedbackList> lists = new List<FeedbackList>();
+            List<Questions> lists = new List<Questions>();
             for (int i = 0; i < sqlDt.Rows.Count; i++)
             {
-                lists.Add(new FeedbackList
-                {
-                    reviewer = sqlDt.Rows[i]["user"].ToString(),
-                    department = sqlDt.Rows[i]["department"].ToString(),
-                    rating = Convert.ToInt32(sqlDt.Rows[i]["rating"]),
-                    comment = sqlDt.Rows[i]["comment"].ToString(),
-                    approval = Convert.ToInt32(sqlDt.Rows[i]["approval"]),
+                lists.Add(new Questions
+                { //cs = blablabla["databaseColumn"].blablabla
+                    QuestionID = Convert.ToInt32(sqlDt.Rows[i]["QuestionID"]),
+                    Question = sqlDt.Rows[i]["Questsion"].ToString(),
+                    QuestionType = sqlDt.Rows[i]["rating"].ToString(),
+                    DepartmentName = sqlDt.Rows[i]["DepartmentName"].ToString(),
                 });
             }
             //convert the list of accounts to an array and return!
