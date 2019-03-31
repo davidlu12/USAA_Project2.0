@@ -88,6 +88,7 @@
     <Content Include="Global.asax" />
     <Content Include="HtmlPage.html" />
     <Content Include="JavaScript.js" />
+    <Content Include="QuestionsService.asmx" />
     <Content Include="Style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -108,6 +109,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Questions.cs" />
+    <Compile Include="QuestionsService.asmx.cs">
+      <DependentUpon>QuestionsService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
