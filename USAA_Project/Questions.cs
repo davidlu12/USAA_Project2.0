@@ -11,6 +11,5 @@ namespace USAA_Project
         public string Question;
         public string QuestionType;
         public string DepartmentName;
-
     }
 }
