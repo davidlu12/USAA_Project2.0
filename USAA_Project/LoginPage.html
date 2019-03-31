@@ -25,7 +25,7 @@
         align-items: center;
         padding-top: 40px;
         padding-bottom: 40px;
-        background-color: #345A93;
+        background-color: rgba(52, 90, 147, 0.67);
     }
 
     .form-signin {
@@ -41,13 +41,14 @@
 
         .form-signin .form-control {
             position: relative;
+            -moz-box-sizing: border-box;
             box-sizing: border-box;
             height: auto;
             padding: 10px;
             font-size: 16px;
         }
 
-            .form-signin .form-control:focus {
+    .form-signin .form-control:focus {
                 z-index: 2;
             }
 
@@ -57,11 +58,11 @@
             border-bottom-left-radius: 0;
         }
 
-        .form-signin input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
 </style>
 
 <body>
@@ -69,7 +70,7 @@
 <form class="form-signin">
     <img class="mb-4" src="C:\Users\K_YAZ\Source\Repos\USAA_Project2.0\USAA_Project\img\USAA.jfif" alt="" width="300" height="250">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail" class="sr-only"></label>s
+    <label for="inputEmail" class="sr-only"></label>
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
     <label for="inputPassword" class="sr-only"></label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>

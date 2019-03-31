@@ -93,7 +93,7 @@
     <Content Include="FeedbackListPage.html" />
     <Content Include="FeedbackListServices.asmx" />
     <Content Include="Global.asax" />
-    <Content Include="HtmlPage.html" />
+    <Content Include="LoginPage.html" />
     <Content Include="img\USAA.jfif" />
     <Content Include="JavaScript.js" />
     <Content Include="QuestionsService.asmx" />
