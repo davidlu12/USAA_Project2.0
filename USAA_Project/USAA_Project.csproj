@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FeedbackListPage.html" />
+    <Content Include="FeedbackListServices.asmx" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage.html" />
     <Content Include="JavaScript.js" />
@@ -91,6 +92,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="FeedbackList.cs" />
+    <Compile Include="FeedbackListServices.asmx.cs">
+      <DependentUpon>FeedbackListServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

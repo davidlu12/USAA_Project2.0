@@ -1,8 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <title>Feedback List Page</title>
+
     <style>
         table {
             width: 70%;
@@ -69,10 +74,70 @@
             display: block;
         }
     </style>
+    <script>
+        var listsArray;
+
+        //this function grabs lists and loads our list window
+        function LoadList() {
+            var webMethod = "FeedbackListServices.asmx/GetList";
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d.length > 0) {
+                        //let's put our accounts that we get from the
+                        //server into our accountsArray variable
+                        //so we can use them in other functions as well
+                        listsArray = msg.d;
+                        //this clears out the div that will hold our account info
+
+                        $("#listItemBox").empty();
+                        for (var i = 0; i < listsArray.length; i++) {
+                            //we grab on to a specific html element in jQuery
+                            //by using a  # followed by that element's id.
+                            var acct;
+
+                            acct = "<td>" + listsArray[i].reviewer + "</td>" +
+                                "<td>" + listsArray[i].department + "</td>" +
+                                "<td>" + listsArray[i].rating + "</td>" +
+                                "<td>" + listsArray[i].comment + "</td>" +
+                                "<td>" + listsArray[i].approval + "</td>"
+
+                            $("#listItemBox").append(
+                                //anything we throw at our panel in the form of text
+                                //will be added to the contents of that panel.  Here
+                                acct
+                            );
+
+                        }
+                    }
+                    //we're showing the account window, so let's track that...
+                    accountWindowShowing = true;
+                    //...because the ShowMenu function behaves differently depending on
+                    //if the account window is showing or not
+                    //ShowMenu();
+                },
+                error: function (e) {
+                    alert("boo...");
+                }
+            });
+        }
+    </script>
 </head>
-<body>
+<body onload="LoadList()">
     <table class="center">
         <tr class="filter">
+            <th>
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Reviewer</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="#about">Hide reviewer***</a>
+                        <a href="#base">Unhide</a>
+                    </div>
+                </div>
+            </th>
             <th>
                 <div class="dropdown">
                     <button class="dropbtn" onclick="myFunction()">
@@ -86,24 +151,7 @@
                     </div>
                 </div>
             </th>
-            <th>
-                <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Employee</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                    </div>
-                </div>
-            </th>
-            <th>
-                <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Reviewer</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                        <a href="#about">Hide reviewer***</a>
-                        <a href="#base">Unhide</a>
-                    </div>
-                </div>
-            </th>
+
             <th>
                 <div class="dropdown">
                     <button class="dropbtn" onclick="myFunction()">
@@ -139,6 +187,9 @@
                     </div>
                 </div>
             </th>
+        </tr>
+        <tr class="listItemBox" id="listItemBox">
+
         </tr>
     </table>
 </body>
