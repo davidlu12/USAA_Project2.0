@@ -6,10 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USAA_Project", "USAA_Project\USAA_Project.csproj", "{8E3D0D79-B7E5-4B43-B101-3E34E32D6D29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2B76EFC3-1D3B-40AC-AFD2-D1827A8FE0C7}"
-	ProjectSection(SolutionItems) = preProject
-		Departments.html = Departments.html
-		QuestionsPage.html = QuestionsPage.html
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

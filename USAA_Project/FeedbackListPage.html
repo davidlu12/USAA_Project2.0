@@ -5,76 +5,46 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Feedback List Page</title>
 
     <style>
         table {
             width: 70%;
-            margin-left: 15%;
-            margin-right: 15%;
+            margin-right: 5%;
+            margin: auto;
+            text-align: center;
         }
 
-        button {
-            width: 100%;
-            height: inherit;
-        }
-
-        .filter {
-            overflow: hidden;
-            background-color: #333;
-            color: white;
-        }
-
-        .dropdown {
+        .filteredOptionsTable {
+            width: 15%;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin: auto;
             float: left;
-            overflow: hidden;
-            width: 100%;
         }
 
-            .dropdown .dropbtn {
-                cursor: pointer;
-                font-size: 16px;
-                border: none;
-                outline: none;
-                padding: 14px 16px;
-                background-color: inherit;
-                color: inherit;
-                font-family: inherit;
-                margin: 0;
-            }
+        .dbListTitle {
+            overflow: hidden;
+            background-color: rgba(0,0,0,.03);
+        }
 
-            .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+        th {
+            padding: .75rem 1.25rem;
+            margin-bottom: 0;
+            background-color: rgba(0,0,0,.03);
+            border-bottom: 1px solid rgba(0,0,0,.125);
+        }
+
+            th:hover {
                 background-color: gold;
             }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-            .dropdown-content a {
-                float: none;
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-                text-align: left;
-            }
-
-                .dropdown-content a:hover {
-                    background-color: #ddd;
-                }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
     </style>
     <script>
+        $('input[type="checkbox"]').on('change', function () {
+            $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+        });
         var listsArray;
 
         //this function grabs lists and loads our list window
@@ -124,69 +94,87 @@
                 }
             });
         }
+
     </script>
 </head>
 <body onload="LoadList()">
-    <table class="center">
-        <tr class="filter">
-            <th>
-                <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Reviewer</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="#about">Hide reviewer***</a>
-                        <a href="#base">Unhide</a>
-                    </div>
-                </div>
-            </th>
-            <th>
-                <div class="dropdown">
-                    <button class="dropbtn" onclick="myFunction()">
-                        Department
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content" id="myDropdown">
-                        <a href="#">Operations</a>
-                        <a href="#">IT</a>
-                        <a href="#">Finance</a>
-                    </div>
-                </div>
-            </th>
+    <div class="filteredOptionsTable">
+        <article class="card-group-item">
+            <header class="card-header">
+                <h6 class="title">Reviewer </h6>
+            </header>
+            <div class="filter-content">
+                <div class="card-body">
+                    <form>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" value="HideReviewer">***Hide reviewer*** <br>
+                            <input class="form-check-input" type="checkbox" value="">Unhide<br>
+                        </label>  <!-- form-check.// -->
+                    </form>
+                </div> <!-- card-body.// -->
+            </div>
+        </article>
+        <article class="card-group-item">
+            <header class="card-header">
+                <h6 class="title">Department </h6>
+            </header>
+            <div class="filter-content">
+                <div class="card-body">
+                    <form>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" value="">Operations<br>
+                            <input class="form-check-input" type="checkbox" value="">Finance<br>
+                            <input class="form-check-input" type="checkbox" value="">IT<br>
+                        </label>  <!-- form-check.// -->
+                    </form>
 
-            <th>
-                <div class="dropdown">
-                    <button class="dropbtn" onclick="myFunction()">
-                        Rating
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content" id="myDropdown">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                    </div>
-                </div>
-            </th>
-            <th>
-                <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Comment</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                    </div>
-                </div>
-            </th>
-            <th>
-                <div class="dropdown">
-                    <button class="dropbtn" onclick="myFunction()">
-                        Approval
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content" id="myDropdown">
-                        <a href="#">Approved</a>
-                        <a href="#">Waiting for approval</a>
-                    </div>
-                </div>
-            </th>
+                </div> <!-- card-body.// -->
+            </div>
+        </article>
+        <article class="card-group-item">
+            <header class="card-header">
+                <h6 class="title">Rating </h6>
+            </header>
+            <div class="filter-content">
+                <div class="card-body">
+                    <form>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1">1<br>
+                            <input class="form-check-input" type="checkbox" value="2">2<br>
+                            <input class="form-check-input" type="checkbox" value="3">3<br>
+                            <input class="form-check-input" type="checkbox" value="4">4<br>
+                            <input class="form-check-input" type="checkbox" value="5">5<br>
+                        </label>  <!-- form-check.// -->
+                    </form>
+
+                </div> <!-- card-body.// -->
+            </div>
+        </article>
+        <article class="card-group-item">
+            <header class="card-header">
+                <h6 class="title">Approval </h6>
+            </header>
+            <div class="filter-content">
+                <div class="card-body">
+                    <form>
+                        <label class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1">Approved<br>
+                            <input class="form-check-input" type="checkbox" value="0">Waiting for approval<br>
+                        </label>  <!-- form-check.// -->
+
+                    </form>
+
+                </div> <!-- card-body.// -->
+            </div>
+        </article>
+    </div>
+    <table class="center">
+        <tr class="dbListTitle ">
+            <th>Reviewer</th>
+            <th>Department</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th>Approval</th>
         </tr>
         <tr class="listItemBox" id="listItemBox">
 
