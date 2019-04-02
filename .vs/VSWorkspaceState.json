@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\USAA_Project",
+    "\\USAA_Project\\App_Data",
+    "\\USAA_Project\\obj\\Debug"
   ],
+  "SelectedNode": "\\USAA_Project.sln",
   "PreviewInSolutionExplorer": false
 }
