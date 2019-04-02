@@ -48,8 +48,8 @@ namespace USAA_Project
                 lists.Add(new Questions
                 { //cs = blablabla["databaseColumn"].blablabla
                     QuestionID = Convert.ToInt32(sqlDt.Rows[i]["QuestionID"]),
-                    Question = sqlDt.Rows[i]["Question"].ToString(),
-                    QuestionType = sqlDt.Rows[i]["Rating"].ToString(),
+                    Question = sqlDt.Rows[i]["Questsion"].ToString(),
+                    QuestionType = sqlDt.Rows[i]["rating"].ToString(),
                     DepartmentName = sqlDt.Rows[i]["DepartmentName"].ToString(),
                 });
             }

@@ -6,49 +6,14 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    
     <title>QuestionsPage</title>
-    <script>
-        $('input[type="checkbox"]').on('change', function () {
-            $('input[name="' + this.name + '"]').not(this).prop('checked', false);
-        });
-        function loadQuestions() {
-            var webMethod = "QuestionsService.asmx/GetList";
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    if (msg.d.length > 0) {
-                        if (msg.d.length > 0) {
-                            questionsArray = msg.d;
-
-                            $("#questionBox").empty();
-                            for (var i = 0; i < questionsArray.length; i++) {
-                                var qstn;
-
-                                qstn = "<td>" + questionsArray[i].QuestionID + "</td>" +
-                                    "<td>" + questionsArray[i].Question + "</td>" +
-                                    "<td>" + questionsArray[i].QuestionType + "</td>" +
-                                    "<td>" + questionsArray[i].DepartmentName + "</td>"
-
-                                $("#questionBox").append)(
-                                    qstn
-                                );
-        }
-                            }
-        questionsWindowShowing = true;
-                        },
-        error: function(e) {
-            alert("boo...");
-        }
-                    }
-                }
-                );
-            }
-    </script>
 </head>
 <body>
+    <script>
+        function loadQuestions() {
+
+        }
+    </script>
 </body>
 </html>
