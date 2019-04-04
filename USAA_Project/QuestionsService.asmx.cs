@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,9 +24,9 @@ namespace USAA_Project
     {
 
         [WebMethod]
-        public Questions[] GetList()
+        public Questions[] GetQuestions()
         {
-            DataTable sqlDt = new DataTable("lists");
+            DataTable sqlDt = new DataTable("questions");
 
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
             string sqlSelect = "select * from question";
@@ -42,10 +42,10 @@ namespace USAA_Project
             //loop through each row in the dataset, creating instances
             //of our container class Account.  Fill each acciount with
             //data from the rows, then dump them in a list.
-            List<Questions> lists = new List<Questions>();
+            List<Questions> questions = new List<Questions>();
             for (int i = 0; i < sqlDt.Rows.Count; i++)
             {
-                lists.Add(new Questions
+                questions.Add(new Questions
                 { //cs = blablabla["databaseColumn"].blablabla
                     QuestionID = Convert.ToInt32(sqlDt.Rows[i]["QuestionID"]),
                     Question = sqlDt.Rows[i]["Question"].ToString(),
@@ -54,7 +54,7 @@ namespace USAA_Project
                 });
             }
             //convert the list of accounts to an array and return!
-            return lists.ToArray();
+            return questions.ToArray();
         }
     }
 }
