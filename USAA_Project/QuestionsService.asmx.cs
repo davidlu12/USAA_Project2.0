@@ -49,7 +49,7 @@ namespace USAA_Project
                 { //cs = blablabla["databaseColumn"].blablabla
                     QuestionID = Convert.ToInt32(sqlDt.Rows[i]["QuestionID"]),
                     Question = sqlDt.Rows[i]["Question"].ToString(),
-                    QuestionType = sqlDt.Rows[i]["Rating"].ToString(),
+                    QuestionType = sqlDt.Rows[i]["QuestionType"].ToString(),
                     DepartmentName = sqlDt.Rows[i]["DepartmentName"].ToString(),
                 });
             }
