@@ -94,7 +94,9 @@
     <Content Include="FeedbackListServices.asmx" />
     <Content Include="Global.asax" />
     <Content Include="LoginPage.html" />
-    <Content Include="img\USAA.jfif" />
+    <Content Include="img\USAA.jfif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="JavaScript.js" />
     <Content Include="QuestionsPage.html" />
     <Content Include="QuestionsService.asmx" />

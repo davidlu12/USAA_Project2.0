@@ -5,12 +5,40 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!--<link rel="stylesheet" href="./signin.css">-->
-	
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>Sign In</title>
+	
+	<script type="text/javascript">
+		//I don't think I need the contentPanel as there will be one main login and not an option to deleted, edit, add, or list account FROM the login page
+
+		//Calling Ajax with jQuery
+		function LogOn(userId, pass) {
+			var webMethod = "AccountServices.asmx/LogOn";
+			var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
+		}
+
+		//jQuery Ajax Method
+        $.ajax({
+            type: "POST",
+            url: webMethod,
+            data: parameters,
+            dataType: "json",
+            success: function(msg) {
+                if (msg.d) {
+                    response.redirect("Departments.html");        /*This is where I'm stuck. I'm unable to redirected to Departments without using a panel*/
+                } else
+                    alert("login failed");
+            }
+
+        });
+		
+
+	</script>
 </head>
+
 
 <style>
 	html,
@@ -72,10 +100,10 @@
 <body>
 
 <form class="form-signin">
-	<img class="mb-4" src="C:\Users\K_YAZ\Source\Repos\USAA_Project2.0\USAA_Project\img\USAA.jfif" alt="" width="300" height="250">
+	<img class="mb-4" src="\img\USAA.jfif" alt="" width="300" height="250">
 	<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 	<label for="inputEmail" class="sr-only"></label>
-	<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+	<input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
 	<label for="inputPassword" class="sr-only"></label>
 	<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 	<div class="checkbox mb-3">

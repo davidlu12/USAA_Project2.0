@@ -344,3 +344,4 @@ C:\Users\David Lu\Source\Repos\USAA_Project2.02\USAA_Project\obj\Debug\USAA_Proj
 C:\Users\David Lu\Source\Repos\USAA_Project2.02\USAA_Project\obj\Debug\USAA_Project.csproj.CopyComplete
 C:\Users\David Lu\Source\Repos\USAA_Project2.02\USAA_Project\obj\Debug\USAA_Project.dll
 C:\Users\David Lu\Source\Repos\USAA_Project2.02\USAA_Project\obj\Debug\USAA_Project.pdb
+C:\Users\K_YAZ\Source\Repos\USAA_Project2.0\USAA_Project\bin\img\USAA.jfif
