@@ -30,7 +30,7 @@
 			margin-right: 5%;
 			margin: auto;
 			text-align: center;
-            margin-top: 0;
+			margin-top: 0;
 		}
 
 		.filteredOptionsTable {			
@@ -50,19 +50,19 @@
 			background-color: white;
 		}
 
-        button {
-            background-color: #1A3258;
-            color: white;
-            border: 2px solid white;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+		button {
+			background-color: #1A3258;
+			color: white;
+			border: 2px solid white;
+			border-radius: 5px;
+			font-weight: bold;
+		}
 
-            button:hover {
-                background-color: white;
-                color: #1A3258;
-                border: 2px solid #1A3258;
-            }
+			button:hover {
+				background-color: white;
+				color: #1A3258;
+				border: 2px solid #1A3258;
+			}
 
 		th {
 			padding: .75rem 1.25rem;
@@ -72,7 +72,7 @@
 			color: white;
 		}
 
-        
+		
 
 		/*th:hover {
 				background-color: gold;
@@ -100,25 +100,25 @@
 						listsArray = msg.d;
 						//this clears out the div that will hold our account info
 
-                        $("#listItemBox").empty();
-                        $("#listItemBox").append("<thead><tr class='dbListTitle '>" +
-                            "<th>Reviewer</th>"+
-                            "<th>Department</th>"+
-                            "<th>Rating</th>"+ 
-                            "<th>Comment</th>"+
-                            "<th>Approval</th>"+
-                            "<th><button onclick='myFunction()'>Print...</button></th></tr></thead>"
-                        );
+						$("#listItemBox").empty();
+						$("#listItemBox").append("<thead><tr class='dbListTitle '>" +
+							"<th>Reviewer</th>"+
+							"<th>Department</th>"+
+							"<th>Rating</th>"+ 
+							"<th>Comment</th>"+
+							"<th>Approval</th>"+
+							"<th><button onclick='myFunction()'>Print...</button></th></tr></thead>"
+						);
 						for (var i = 0; i < listsArray.length; i++) {
 							//we grab on to a specific html element in jQuery
 							//by using a  # followed by that element's id.
 							var acct;
 
-                            acct = "<tbody><tr>"+ "<td>" + listsArray[i].reviewer + "</td>" +
+							acct = "<tbody><tr>"+ "<td>" + listsArray[i].reviewer + "</td>" +
 								"<td>" + listsArray[i].department + "</td>" +
 								"<td>" + listsArray[i].rating + "</td>" +
 								"<td>" + listsArray[i].comment + "</td>" +
-                                "<td>" + listsArray[i].approval + "</td>" + "</tr></tbody>"
+								"<td>" + listsArray[i].approval + "</td>" + "</tr></tbody>"
 
 
 							$("#listItemBox").append(
@@ -139,103 +139,103 @@
 					alert("boo...");
 				}
 			});
-        }
-        function myFunction() {
-            window.print();
-        }
-        function hideReviewer() {
+		}
+		function myFunction() {
+			window.print();
+		}
+		function hideReviewer() {
 
-        }
+		}
 
 
-    </script>
+	</script>
 </head>
 <body onload="LoadList()">
-    <div class="filteredOptionsTable col-2">
-        <article class="card-group-item">
-            <header class="card-header">
-                <h6 class="title">Reviewer </h6>
-            </header>
-            <div class="filter-content">
-                <div class="card-body">
-                    <form>
-                        <label class="form-check">
-                            <input class="form-check-input" id="hideReviewerCB" type="checkbox" value="HideReviewer">***Hide reviewer*** <br>
-                            <input class="form-check-input" id="unhideCB" type="checkbox" value="">Unhide<br>
-                        </label>  <!-- form-check.// -->
-                    </form>
-                </div> <!-- card-body.// -->
-            </div>
-        </article>
-        <article class="card-group-item">
-            <header class="card-header">
-                <h6 class="title">Department </h6>
-            </header>
-            <div class="filter-content">
-                <div class="card-body">
-                    <form>
-                        <label class="form-check">
-                            <input class="form-check-input" type="checkbox" value="">Operations<br>
-                            <input class="form-check-input" type="checkbox" value="">Finance<br>
-                            <input class="form-check-input" type="checkbox" value="">IT<br>
-                        </label>  <!-- form-check.// -->
-                    </form>
+	<div class="filteredOptionsTable col-2">
+		<article class="card-group-item">
+			<header class="card-header">
+				<h6 class="title">Reviewer </h6>
+			</header>
+			<div class="filter-content">
+				<div class="card-body">
+					<form>
+						<label class="form-check">
+							<input class="form-check-input" id="hideReviewerCB" type="checkbox" value="HideReviewer">***Hide reviewer*** <br>
+							<input class="form-check-input" id="unhideCB" type="checkbox" value="">Unhide<br>
+						</label>  <!-- form-check.// -->
+					</form>
+				</div> <!-- card-body.// -->
+			</div>
+		</article>
+		<article class="card-group-item">
+			<header class="card-header">
+				<h6 class="title">Department </h6>
+			</header>
+			<div class="filter-content">
+				<div class="card-body">
+					<form>
+						<label class="form-check">
+							<input class="form-check-input" type="checkbox" value="">Operations<br>
+							<input class="form-check-input" type="checkbox" value="">Finance<br>
+							<input class="form-check-input" type="checkbox" value="">IT<br>
+						</label>  <!-- form-check.// -->
+					</form>
 
-                </div> <!-- card-body.// -->
-            </div>
-        </article>
-        <article class="card-group-item">
-            <header class="card-header">
-                <h6 class="title">Rating </h6>
-            </header>
-            <div class="filter-content">
-                <div class="card-body">
-                    <form>
-                        <label class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1">1<br>
-                            <input class="form-check-input" type="checkbox" value="2">2<br>
-                            <input class="form-check-input" type="checkbox" value="3">3<br>
-                            <input class="form-check-input" type="checkbox" value="4">4<br>
-                            <input class="form-check-input" type="checkbox" value="5">5<br>
-                        </label>  <!-- form-check.// -->
-                    </form>
+				</div> <!-- card-body.// -->
+			</div>
+		</article>
+		<article class="card-group-item">
+			<header class="card-header">
+				<h6 class="title">Rating </h6>
+			</header>
+			<div class="filter-content">
+				<div class="card-body">
+					<form>
+						<label class="form-check">
+							<input class="form-check-input" type="checkbox" value="1">1<br>
+							<input class="form-check-input" type="checkbox" value="2">2<br>
+							<input class="form-check-input" type="checkbox" value="3">3<br>
+							<input class="form-check-input" type="checkbox" value="4">4<br>
+							<input class="form-check-input" type="checkbox" value="5">5<br>
+						</label>  <!-- form-check.// -->
+					</form>
 
-                </div> <!-- card-body.// -->
-            </div>
-        </article>
-        <article class="card-group-item">
-            <header class="card-header">
-                <h6 class="title">Approval </h6>
-            </header>
-            <div class="filter-content">
-                <div class="card-body">
-                    <form>
-                        <label class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1">Approved<br>
-                            <input class="form-check-input" type="checkbox" value="0">Waiting for approval<br>
-                        </label>  <!-- form-check.// -->
-                    </form>
-                </div> <!-- card-body.// -->
-            </div>
-        </article>
-        <article class="card-group-item">
-            <header class="card-header">
-                <h6 class="title">        </h6>
-            </header>
-        </article>
-    </div>
-    <table class=" table table-hover col-9" id="listItemBox">
-        <!--<tr class="dbListTitle ">
-            <th>Reviewer</th>
-            <th>Department</th>
-            <th>Rating</th>
-            <th>Comment</th>
-            <th>Approval</th>
-            <th><button onclick="myFunction()">Print this page</button></th>
-        </tr>-->
-        <!--<tr class="listItemBox" id="listItemBox">
+				</div> <!-- card-body.// -->
+			</div>
+		</article>
+		<article class="card-group-item">
+			<header class="card-header">
+				<h6 class="title">Approval </h6>
+			</header>
+			<div class="filter-content">
+				<div class="card-body">
+					<form>
+						<label class="form-check">
+							<input class="form-check-input" type="checkbox" value="1">Approved<br>
+							<input class="form-check-input" type="checkbox" value="0">Waiting for approval<br>
+						</label>  <!-- form-check.// -->
+					</form>
+				</div> <!-- card-body.// -->
+			</div>
+		</article>
+		<article class="card-group-item">
+			<header class="card-header">
+				<h6 class="title">        </h6>
+			</header>
+		</article>
+	</div>
+	<table class=" table table-hover col-9" id="listItemBox">
+		<!--<tr class="dbListTitle ">
+			<th>Reviewer</th>
+			<th>Department</th>
+			<th>Rating</th>
+			<th>Comment</th>
+			<th>Approval</th>
+			<th><button onclick="myFunction()">Print this page</button></th>
+		</tr>-->
+		<!--<tr class="listItemBox" id="listItemBox">
 
-        </tr>-->
-    </table>
+		</tr>-->
+	</table>
 </body>
 </html>
