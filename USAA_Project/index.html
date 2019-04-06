@@ -17,15 +17,15 @@
 
         <div id="logonPanel" class="contentPanel logonPanel">
             <div class="logonBox">
-                <form class="form-signin" onsubmit="LogOn($('#logonId').val(), $('#logonPassword').val());return false;">
+                <form class="form-signin" onsubmit="LogOn($('#inputEmail').val(), $('#inputPassword').val());return false;">
                     <img class="mb-4" src="\img\USAA.jfif" alt="" width="300" height="250">
                     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                     <label for="inputEmail" class="sr-only"></label>
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
+                    <input type="text" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
                     <label for="inputPassword" class="sr-only"></label>
                     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-                    <br />
+                    <br>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
 
                     <p class="mt-5 mb-3 text-muted">&copy; 2019 Scrum and Scrummer</p>
@@ -84,7 +84,7 @@
                                 <option value="ethics">Ethics</option>
                                 <option value="flexibility">Flexibility</option>
                                 <option value="compensation">Compensation</option>
-                                <option value="recogntion">Recognition</option>
+                                <option value="recognition">Recognition</option>
                                 <option value="vacationTime">Vacation Time</option>
                             </select>
                         </button>
