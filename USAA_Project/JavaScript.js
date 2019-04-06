@@ -43,7 +43,7 @@ function LogOn(userId, pass) {
                 LoadAccounts();
             }
             else {
-                alert("login failed");
+                $('.alert').alert();
             }
         },
         error: function (e) {

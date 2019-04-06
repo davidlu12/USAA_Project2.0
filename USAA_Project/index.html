@@ -24,9 +24,10 @@
                     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
                     <label for="inputPassword" class="sr-only"></label>
                     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                    
+
                     <br />
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+
                     <p class="mt-5 mb-3 text-muted">&copy; 2019 Scrum and Scrummer</p>
                 </form>
 
@@ -93,118 +94,12 @@
             </div>
         </div>
 
-
-        <div id="listPanel" class="contentPanel">
-            <div class="listBox">
-                <div class="addUserContainer">
-                    <span>Add User</span>
-                    <input type="text" id="AddUser">
-                    <button type="button" id="AddUserButton" onclick="addUser()">Add User</button>
-                    <p id=userAlert></p>
-                </div>
-                <div class="left">List</div>
-
-
-                <div class="center">
-                    <input type="text" id="txt">
-                    <!--<div class="itemContainer">-->
-                    <table id="buttonTable" class="center">
-                        <tr>
-                            <td><button type="submit" onclick="AddItem($('#txt').val()); return false;">Add</button></td>
-                            <td><button onclick="EditListItem($('#txt').val()); return false;">Edit</button></td>
-                            <td><button onclick="DeleteItem(); return false;">Delete</button></td>
-                        </tr>
-                    </table>
-                    <div id="listMain" class="center">
-                        <ul class="listItemBox" id="listItemBox"></ul>
-                    </div>
-                    <!--add store -->
-                    <div id="storeTable" class="center">
-                        <div class="left">Store</div>
-                        <input type="text" id="storeTxt">
-                    </div>
-                    <div class="storeContainer">
-                        <table id="storeButtonTable" class="center">
-                            <tr>
-                                <td><button id="addStoreButton" onclick="AddStore($('#storeTxt').val()); return false;">Add</button></td>
-                                <td><button onclick="EditStore($('#storeTxt').val()); return false;">Edit</button></td>
-                                <td><button onclick="DeleteStore(); return false;">Delete</button></td>
-                            </tr>
-                        </table>
-
-                        <div id="main" class="center">
-                            <ul class="storeListBox" id="storeListBox"></ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div id="requestsPanel" class="contentPanel">
-            <div class="left">Account requests</div>
-            <hr />
-            <div class="accountsBox" id="requestsBox">
-
-
-            </div>
-        </div>
-
-        <div id="newAccountPanel" class="contentPanel newAccountPanel">
-            <div class="newAccountBox">
-                <form onsubmit="CreateAccount($('#newLogonId').val(), $('#newLogonPassword').val(), $('#newLogonFName').val(), $('#newLogonLName').val(), $('#newLogonEmail').val()); return false;">
-                    <div id="logonLabel" class="left">REQUEST ACCOUNT</div>
-                    <div class="left">
-                        ID <input type="text" id="newLogonId" />
-                    </div>
-                    <div class="left">
-                        PASSWORD <input type="password" id="newLogonPassword" />
-                    </div>
-                    <div class="left">
-                        FIRST <input type="text" id="newLogonFName" />
-                    </div>
-                    <div class="left">
-                        LAST <input type="text" id="newLogonLName" />
-                    </div>
-                    <div class="left">
-                        EMAIL <input type="text" id="newLogonEmail" />
-                    </div>
-                    <div class="center">
-                        <button type="submit">CREATE</button>
-                    </div>
-                    <div><a href="#" onclick="showPanel('logonPanel')" class="tinyLink">...or login</a></div>
-                </form>
-
-            </div>
-        </div>
-
-        <div id="editAccountPanel" class="contentPanel newAccountPanel">
-            <div class="newAccountBox">
-                <form onsubmit="EditAccount(); return false;">
-                    <div id="logonLabel" class="left">EDIT ACCOUNT</div>
-                    <div class="left">
-                        ID <input type="text" id="editLogonId" />
-                    </div>
-                    <div class="left">
-                        PASSWORD <input type="password" id="editLogonPassword" />
-                    </div>
-                    <div class="left">
-                        FIRST <input type="text" id="editLogonFName" />
-                    </div>
-                    <div class="left">
-                        LAST <input type="text" id="editLogonLName" />
-                    </div>
-                    <div class="left">
-                        EMAIL <input type="text" id="editLogonEmail" />
-                    </div>
-                    <div class="left">
-                        <button type="submit">SAVE</button>
-                    </div>
-                    <div><a href="#" onclick="DeactivateAccount()" class="tinyLink">...or deactivate</a></div>
-                </form>
-
-            </div>
-        </div>
+        <!--Removed listPanel-->
+        <!--Removed requestPanel-->
+        <!--Removed newAccountPanel-->
+        <!--Removed editAccountPanel-->
+        
+        <!--Add questionsPanel Here-->
 
     </div>
 
