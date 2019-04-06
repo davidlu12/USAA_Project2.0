@@ -14,14 +14,6 @@
 
 
 <body>
-    <div class="titleContainer">
-        <span>USAA</span>
-        <div id="menu" class="menu">
-            <a href="#" id="adminLink" onclick="adminClick()"></a>
-            <a href="#" onclick="LogOff()">log off</a>
-        </div>
-    </div>
-
 
     <div class="contentContainer">
 
@@ -39,14 +31,11 @@
                         <button type="submit">LOGIN</button>
                     </div>
                 </form>
-                <form method="get" action="/page2">
-                    <button type="submit">Continue</button>
-                </form>
 
             </div>
         </div>
 
-        <div id="accountsPanel" class="contentPanel">
+        <div id="departmentsPanel" class="contentPanel">
             <h1 class="text-center mb-4 font-weight-bolder">Departments</h1>
             <h3 class="text-center mb-sm-1 font-italic">Select department to give feedback.</h3>
             <div class="row">
@@ -69,12 +58,12 @@
                         <button class="col">Human Resources</button>
                         <button class="col">
                             Information Technology
-                            <SELECT>
+                            <select>
                                 <option value="dataAnalytics">Data Analytics</option>
                                 <option value="mobileDevelopment">Mobile Development</option>
-                                <option value="techSupport">Technical Supoort</option>
+                                <option value="techSupport">Technical Support</option>
                                 <option value="webDevelopment">Web Development</option>
-                            </SELECT>
+                            </select>
                         </button>
                         <button class="col">Legal</button>
                     </div>
