@@ -6,9 +6,221 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="Javascript.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
+
+
 <body>
+    <div class="titleContainer">
+        <span>USAA</span>
+        <div id="menu" class="menu">
+            <a href="#" id="adminLink" onclick="adminClick()"></a>
+            <a href="#" onclick="LogOff()">log off</a>
+        </div>
+    </div>
+
+
+    <div class="contentContainer">
+
+        <div id="logonPanel" class="contentPanel logonPanel">
+            <div class="logonBox">
+                <form onsubmit="LogOn($('#logonId').val(), $('#logonPassword').val()); return false;">
+                    <div id="logonLabel" class="left">LOGIN</div>
+                    <div class="left">
+                        ID <input type="text" id="logonId" />
+                    </div>
+                    <div class="left">
+                        PASSWORD <input type="password" id="logonPassword" />
+                    </div>
+                    <div>
+                        <button type="submit">LOGIN</button>
+                    </div>
+                </form>
+                <form method="get" action="/page2">
+                    <button type="submit">Continue</button>
+                </form>
+
+            </div>
+        </div>
+
+        <div id="accountsPanel" class="contentPanel">
+            <h1 class="text-center mb-4 font-weight-bolder">Departments</h1>
+            <h3 class="text-center mb-sm-1 font-italic">Select department to give feedback.</h3>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6" id="departmentsDiv">
+                    <div class="row">
+                        <button class="col">Administrative & Management</button>
+                        <button class="col">Customer Support</button>
+                        <button class="col">
+                            Finance & Accounting
+                            <select>
+                                <option value="accountsPayable">Accounts Payable</option>
+                                <option value="accountsReceivable">Accounts Receivable</option>
+                                <option value="financialReporting">Financial Reporting</option>
+                                <option value="payroll">Payroll</option>
+                            </select>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <button class="col">Human Resources</button>
+                        <button class="col">
+                            Information Technology
+                            <SELECT>
+                                <option value="dataAnalytics">Data Analytics</option>
+                                <option value="mobileDevelopment">Mobile Development</option>
+                                <option value="techSupport">Technical Supoort</option>
+                                <option value="webDevelopment">Web Development</option>
+                            </SELECT>
+                        </button>
+                        <button class="col">Legal</button>
+                    </div>
+                    <div class="row">
+                        <button class="col">Marketing</button>
+                        <button class="col">Operations</button>
+                        <button class="col">Purchasing</button>
+                    </div>
+                    <div class="row">
+                        <button class="col">Research & Development</button>
+                        <button class="col">Sales</button>
+                        <button class="col">
+                            <strong>Other</strong>
+                            <select>
+                                <option value="advancement">Advancement</option>
+                                <option value="benefits">Benefits</option>
+                                <option value="companyCulture">Company Culture</option>
+                                <option value="environment">Environment</option>
+                                <option value="ethics">Ethics</option>
+                                <option value="flexibility">Flexibility</option>
+                                <option value="compensation">Compensation</option>
+                                <option value="recogntion">Recognition</option>
+                                <option value="vacationTime">Vacation Time</option>
+                            </select>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+
+
+        <div id="listPanel" class="contentPanel">
+            <div class="listBox">
+                <div class="addUserContainer">
+                    <span>Add User</span>
+                    <input type="text" id="AddUser">
+                    <button type="button" id="AddUserButton" onclick="addUser()">Add User</button>
+                    <p id=userAlert></p>
+                </div>
+                <div class="left">List</div>
+
+
+                <div class="center">
+                    <input type="text" id="txt">
+                    <!--<div class="itemContainer">-->
+                    <table id="buttonTable" class="center">
+                        <tr>
+                            <td><button type="submit" onclick="AddItem($('#txt').val()); return false;">Add</button></td>
+                            <td><button onclick="EditListItem($('#txt').val()); return false;">Edit</button></td>
+                            <td><button onclick="DeleteItem(); return false;">Delete</button></td>
+                        </tr>
+                    </table>
+                    <div id="listMain" class="center">
+                        <ul class="listItemBox" id="listItemBox"></ul>
+                    </div>
+                    <!--add store -->
+                    <div id="storeTable" class="center">
+                        <div class="left">Store</div>
+                        <input type="text" id="storeTxt">
+                    </div>
+                    <div class="storeContainer">
+                        <table id="storeButtonTable" class="center">
+                            <tr>
+                                <td><button id="addStoreButton" onclick="AddStore($('#storeTxt').val()); return false;">Add</button></td>
+                                <td><button onclick="EditStore($('#storeTxt').val()); return false;">Edit</button></td>
+                                <td><button onclick="DeleteStore(); return false;">Delete</button></td>
+                            </tr>
+                        </table>
+
+                        <div id="main" class="center">
+                            <ul class="storeListBox" id="storeListBox"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="requestsPanel" class="contentPanel">
+            <div class="left">Account requests</div>
+            <hr />
+            <div class="accountsBox" id="requestsBox">
+
+
+            </div>
+        </div>
+
+        <div id="newAccountPanel" class="contentPanel newAccountPanel">
+            <div class="newAccountBox">
+                <form onsubmit="CreateAccount($('#newLogonId').val(), $('#newLogonPassword').val(), $('#newLogonFName').val(), $('#newLogonLName').val(), $('#newLogonEmail').val()); return false;">
+                    <div id="logonLabel" class="left">REQUEST ACCOUNT</div>
+                    <div class="left">
+                        ID <input type="text" id="newLogonId" />
+                    </div>
+                    <div class="left">
+                        PASSWORD <input type="password" id="newLogonPassword" />
+                    </div>
+                    <div class="left">
+                        FIRST <input type="text" id="newLogonFName" />
+                    </div>
+                    <div class="left">
+                        LAST <input type="text" id="newLogonLName" />
+                    </div>
+                    <div class="left">
+                        EMAIL <input type="text" id="newLogonEmail" />
+                    </div>
+                    <div class="center">
+                        <button type="submit">CREATE</button>
+                    </div>
+                    <div><a href="#" onclick="showPanel('logonPanel')" class="tinyLink">...or login</a></div>
+                </form>
+
+            </div>
+        </div>
+
+        <div id="editAccountPanel" class="contentPanel newAccountPanel">
+            <div class="newAccountBox">
+                <form onsubmit="EditAccount(); return false;">
+                    <div id="logonLabel" class="left">EDIT ACCOUNT</div>
+                    <div class="left">
+                        ID <input type="text" id="editLogonId" />
+                    </div>
+                    <div class="left">
+                        PASSWORD <input type="password" id="editLogonPassword" />
+                    </div>
+                    <div class="left">
+                        FIRST <input type="text" id="editLogonFName" />
+                    </div>
+                    <div class="left">
+                        LAST <input type="text" id="editLogonLName" />
+                    </div>
+                    <div class="left">
+                        EMAIL <input type="text" id="editLogonEmail" />
+                    </div>
+                    <div class="left">
+                        <button type="submit">SAVE</button>
+                    </div>
+                    <div><a href="#" onclick="DeactivateAccount()" class="tinyLink">...or deactivate</a></div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
 
 </body>
 </html>
