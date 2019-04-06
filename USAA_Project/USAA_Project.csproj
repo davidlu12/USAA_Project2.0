@@ -93,6 +93,7 @@
     <Content Include="FeedbackListPage.html" />
     <Content Include="FeedbackListServices.asmx" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="LoginPage.html" />
     <Content Include="img\USAA.jfif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -136,6 +137,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="loginStyles.css" />
+    <Content Include="styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
