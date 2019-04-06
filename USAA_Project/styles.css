@@ -3,28 +3,13 @@
     flex-direction: column;
     justify-content: center;
     margin: auto;
+    height: 100%;
     width: 100%;
     padding: 10px;
     overflow: scroll;
     overflow-x: hidden;
     font-family: Gotham,Arial,sans-serif;
     background-color: #3e4042;
-}
-
-body {
-    height: 100%;
-}
-
-.titleContainer {
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: 1px solid gray;
-    border-radius: 25px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: black;
 }
 
 .menu {
@@ -34,10 +19,10 @@ body {
     visibility: hidden;
 }
 
-    .menu a {
-        font-size: small;
-        color: #006600;
-    }
+.menu a {
+    font-size: small;
+    color: #006600;
+}
 
 .contentContainer {
     flex: 1;
@@ -53,8 +38,7 @@ body {
     width: 100%;
     visibility: hidden;
     flex: 1;
-    /*border:                   1px solid gray;
-    border-radius:              25px;*/
+
 }
 
 .logonPanel {
@@ -84,8 +68,9 @@ body {
 .logonBox {
     display: inline-block;
     text-align: right;
-    background-color: white;
-    height: 500px;
+    background-color: gray;
+    border: 4px solid firebrick;
+    height: 700px;
     margin: 100px;
     width: 400px;
 }
@@ -117,13 +102,13 @@ body {
 
 .logonBox button {
     width: 100%;
-    height: 30px;
-    background-color: #3cb371;
-    color: white;
+    height: 40px;
+    background-color: firebrick;
     font-size: 15px;
     cursor: pointer;
-    border: 0px;
+    border: 1px;
 }
+
 
 .newAccountPanel {
     text-align: center;
