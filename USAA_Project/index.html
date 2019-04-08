@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>USAA Survey</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="Javascript.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<body>
+    <div class="contentContainer">
+
+        <div id="logonPanel" class="contentPanel logonPanel">
+            <div class="logonBox">
+                <form class="form-signin" onsubmit="LogOn($('#inputEmail').val(), $('#inputPassword').val());return false;">
+                    <img class="mb-4" src="\img\USAA.jfif" alt="" width="300" height="250">
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <label for="inputEmail" class="sr-only"></label>
+                    <input type="text" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
+                    <label for="inputPassword" class="sr-only"></label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+
+                    <p class="mt-5 mb-3 text-muted">&copy; 2019 Scrum and Scrummer</p>
+                </form>
+
+            </div>
+        </div>
+
+        <div id="departmentsPanel" class="contentPanel">
+            <h1 class="text-center mb-4 font-weight-bolder">Departments</h1>
+            <h3 class="text-center mb-sm-1 font-italic">Select department to give feedback.</h3>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6" id="departmentsDiv">
+                    <div class="row">
+                        <button class="col">Administrative & Management</button>
+                        <button class="col">Customer Support</button>
+                        <button class="col">
+                            Finance & Accounting
+                            <select>
+                                <option value="accountsPayable">Accounts Payable</option>
+                                <option value="accountsReceivable">Accounts Receivable</option>
+                                <option value="financialReporting">Financial Reporting</option>
+                                <option value="payroll">Payroll</option>
+                            </select>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <button class="col">Human Resources</button>
+                        <button class="col">
+                            Information Technology
+                            <select>
+                                <option value="dataAnalytics">Data Analytics</option>
+                                <option value="mobileDevelopment">Mobile Development</option>
+                                <option value="techSupport">Technical Support</option>
+                                <option value="webDevelopment">Web Development</option>
+                            </select>
+                        </button>
+                        <button class="col">Legal</button>
+                    </div>
+                    <div class="row">
+                        <button class="col">Marketing</button>
+                        <button class="col">Operations</button>
+                        <button class="col">Purchasing</button>
+                    </div>
+                    <div class="row">
+                        <button class="col">Research & Development</button>
+                        <button class="col">Sales</button>
+                        <button class="col">
+                            <strong>Other</strong>
+                            <select>
+                                <option value="advancement">Advancement</option>
+                                <option value="benefits">Benefits</option>
+                                <option value="companyCulture">Company Culture</option>
+                                <option value="environment">Environment</option>
+                                <option value="ethics">Ethics</option>
+                                <option value="flexibility">Flexibility</option>
+                                <option value="compensation">Compensation</option>
+                                <option value="recognition">Recognition</option>
+                                <option value="vacationTime">Vacation Time</option>
+                            </select>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+
+        <!--Removed listPanel-->
+        <!--Removed requestPanel-->
+        <!--Removed newAccountPanel-->
+        <!--Removed editAccountPanel-->
+        
+        <!--Add questionsPanel Here-->
+
+    </div>
+
+
+</body>
+</html>
