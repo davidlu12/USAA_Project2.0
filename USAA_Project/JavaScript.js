@@ -1,7 +1,7 @@
 ﻿//we're using a stacked card approach for our main viewing area
 //this array holds the ids of our cards and the method
 //allows us to easly switch the interface from one to the other
-var contentPanels = ['logonPanel', 'newAccountPanel', 'accountsPanel', 'listPanel', 'editAccountPanel', 'requestsPanel'];
+var contentPanels = ['logonPanel','departmentsPanel', 'questionsPanel', 'feedbackListPanel'];
 //this function toggles which panel is showing, and also clears data from all panels
 function showPanel(panelId) {
     clearData();
@@ -26,59 +26,33 @@ function clearData() {
 
 //HERE'S AN EXAMPLE OF AN AJAX CALL WITH JQUERY!
 function LogOn(userId, pass) {
-    //the url of the webservice we will be talking to
     var webMethod = "AccountServices.asmx/LogOn";
-    //the parameters we will pass the service (in json format because curly braces)
-    //note we encode the values for transmission over the web.  All the \'s are just
-    //because we want to wrap our keynames and values in double quotes so we have to
-    //escape the double quotes (because the overall string we're creating is in double quotes!)
     var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
 
     //jQuery ajax method
     $.ajax({
-        //post is more secure than get, and allows
-        //us to send big data if we want.  really just
-        //depends on the way the service you're talking to is set up, though
         type: "POST",
-        //the url is set to the string we created above
         url: webMethod,
-        //same with the data
         data: parameters,
-        //these next two key/value pairs say we intend to talk in JSON format
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        //jQuery sends the data and asynchronously waits for a response.  when it
-        //gets a response, it calls the function mapped to the success key here
         success: function (msg) {
-            //the server response is in the msg object passed in to the function here
-            //since our logon web method simply returns a true/false, that value is mapped
-            //to a generic property of the server response called d (I assume short for data
-            //but honestly I don't know...)
             if (msg.d) {
-                //server replied true, so show the accounts panel
-                showPanel('accountsPanel');
+                //server replied true, so show the departments panel
+                showPanel("departmentsPanel");
                 LoadAccounts();
             }
             else {
-                //server replied false, so let the user know
-                //the logon failed
-                alert("login failed");
+                alert("Login Fail");
             }
         },
         error: function (e) {
-            //if something goes wrong in the mechanics of delivering the
-            //message to the server or the server processing that message,
-            //then this function mapped to the error key is executed rather
-            //than the one mapped to the success key.  This is just a garbage
-            //alert becaue I'm lazy
             alert("boo...");
         }
     });
 }
 
-//when we retrieve accounts, we'll put them here
-//so that we can reference them later for admins
-//that may want to edit accounts
+//List all accounts for admins to view
 var accountsArray;
 //to begin with, we assume that the account is not an admin
 var admin = false;
@@ -410,86 +384,6 @@ function EditAccount() {
 // Functions for List below ----------------------------------------------------------------------------------------------------
 
 
-var listsArray;
-
-//this function grabs lists and loads our list window
-function LoadList() {
-    var webMethod = "ListServices.asmx/GetList";
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            if (msg.d.length > 0) {
-                //let's put our accounts that we get from the
-                //server into our accountsArray variable
-                //so we can use them in other functions as well
-                listsArray = msg.d;
-                //this clears out the div that will hold our account info
-                $("#listItemBox").empty();
-                for (var i = 0; i < listsArray.length; i++) {
-                    //we grab on to a specific html element in jQuery
-                    //by using a  # followed by that element's id.
-                    var acct;
-
-                    acct = "<input type='checkbox' class='" + listsArray[i].checkedId + "' id='myCheck" + listsArray[i].id + "' onclick=" + "\"CrossOutItem(" + listsArray[i].id + ",'" + listsArray[i].checkedId + "')" + "\">" +
-                        "<li class='accountRow' id=" + listsArray[i].id + " onclick='currentItem(" + listsArray[i].id + ")'>" +
-                        listsArray[i].list + "</li>"
-
-                    var acctChecked;
-                    acctChecked = "<input type='checkbox' class='" + listsArray[i].checkedId + "' id='myCheck" + listsArray[i].id + "' onclick=" + "\"CrossOutItem(" + listsArray[i].id + ",'" + listsArray[i].checkedId + "')" + "\" checked>" +
-                        "<li class='accountRow' id=" + listsArray[i].id + " onclick='currentItem(" + listsArray[i].id + ")'>" +
-                        listsArray[i].list + "</li>"
-
-                    if (listsArray[i].checkedId == "unchecked") {
-                        $("#listItemBox").append(
-                            //anything we throw at our panel in the form of text
-                            //will be added to the contents of that panel.  Here
-                            acct
-                        );
-                    } else {
-                        $("#listItemBox").append(
-                            //anything we throw at our panel in the form of text
-                            //will be added to the contents of that panel.  Here
-                            acctChecked
-                        );
-                    }
-
-                }
-            }
-            //we're showing the account window, so let's track that...
-            accountWindowShowing = true;
-            //...because the ShowMenu function behaves differently depending on
-            //if the account window is showing or not
-            ShowMenu();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
-
-//passes item info to the server, to add item to list
-function AddItem(item) {
-    var webMethod = "ListServices.asmx/AddItemToList";
-    var parameters = "{\"item\":\"" + encodeURI(item) + "\"}";
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            alert("Item successfully added");
-            LoadList();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
 
 var currentItemId;
 var currentItemUpdates;
@@ -547,22 +441,7 @@ function DeleteItem() {
     });
 }
 
-var crossOutItemId;
-var crossOutCheckedId;
-// Saves selected item ID and outputs text content in txt input box.
-function CrossOutItem(id, checkedId) {
-    var className = "myCheck" + id.toString();
-    console.log(className);
-    var checkBox = document.getElementById(className);
-    crossOutItemId = id;
-    crossOutCheckedId = checkedId;
-    if (checkBox.checked == true) {
-        crossOutCheckedId = "checked";
-    } else {
-        crossOutCheckedId = "unchecked";
-    }
-    CrossOut();
-}
+
 
 //ajax to send the edits of an item to the server
 function CrossOut() {
@@ -584,148 +463,4 @@ function CrossOut() {
             alert("boo...");
         }
     });
-}
-
-// ------------------------------------------------------------------------------ JS for store list
-var storeArray;
-
-//this function grabs lists and loads our list window
-function LoadStores() {
-    var webMethod = "StoreServices.asmx/GetStoreList";
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            if (msg.d.length > 0) {
-                //let's put our accounts that we get from the
-                //server into our accountsArray variable
-                //so we can use them in other functions as well
-                storeArray = msg.d;
-                //this clears out the div that will hold our account info
-                $("#storeListBox").empty();
-                for (var i = 0; i < storeArray.length; i++) {
-                    //we grab on to a specific html element in jQuery
-                    //by using a  # followed by that element's id.
-                    var acct;
-
-                    acct = "<li class='accountRow' id='store" + storeArray[i].id + "' onclick='currentStore(" + storeArray[i].id + ")'>" +
-                        storeArray[i].storeName + "</li>"
-
-                    $("#storeListBox").append(
-                        //anything we throw at our panel in the form of text
-                        //will be added to the contents of that panel.  Here
-                        acct
-                    );
-                }
-            }
-            //we're showing the account window, so let's track that...
-            accountWindowShowing = true;
-            //...because the ShowMenu function behaves differently depending on
-            //if the account window is showing or not
-            ShowMenu();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
-
-//passes item info to the server, to add item to list
-function AddStore(store) {
-    var webMethod = "StoreServices.asmx/AddStoreToList";
-    var parameters = "{\"store\":\"" + encodeURI(store) + "\"}";
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            alert("Store successfully added");
-            LoadStores();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
-
-var currentStoreId;
-var currentStoreUpdates;
-
-// Saves selected item ID and outputs text content in txt input box.
-function currentStore(id) {
-    currentStoreId = id;
-    var storeText = document.getElementById("store" + id).textContent;
-    var inputText = document.getElementById("storeTxt");
-    inputText.value = storeText;
-}
-
-//ajax to send the edits of an item to the server
-function EditStore() {
-    currentStoreUpdates = document.getElementById("storeTxt").value;
-    var webMethod = "StoreServices.asmx/UpdateStore";
-    var parameters = "{\"id\":\"" + encodeURI(currentStoreId) + "\",\"store\":\"" + encodeURI(currentStoreUpdates) + "\"}";
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            showPanel('listPanel');
-            alert("Store successfully updated");
-            LoadStores();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
-
-//an ajax to delete a list
-function DeleteStore() {
-    var webMethod = "StoreServices.asmx/DeleteStore";
-    var parameters = "{\"id\":\"" + encodeURI(currentStoreId) + "\"}";
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            showPanel('listPanel');
-            alert("Store successfully deleted from list");
-            LoadStores();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
-// -------------------------------------------------------------------------------------- add user email
-function addUser() {
-
-    dontHide();
-    input = document.getElementById('AddUser').value;
-    document.getElementById('AddUser').value = "";
-    alert = document.getElementById('userAlert');
-
-    alert.append("The user with the email " + input + " has been added to the list!!");
-
-    setTimeout("doHide()", 5000);
-}
-
-function doHide() {
-    document.getElementById("userAlert").style.display = "none";
-}
-
-function dontHide() {
-    document.getElementById("userAlert").innerHTML = "";
-    document.getElementById("userAlert").style.display = "block";
 }
