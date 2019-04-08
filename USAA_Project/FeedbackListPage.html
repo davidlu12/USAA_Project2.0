@@ -70,13 +70,8 @@
 			background-color: #1A3258;
 			border-bottom: 1px solid rgba(0,0,0,.125);
 			color: white;
-		}
+		}		
 
-		
-
-		/*th:hover {
-				background-color: gold;
-		}*/
 	</style>
 	<script>
 		$('input[type="checkbox"]').on('change', function () {
@@ -100,8 +95,8 @@
 						listsArray = msg.d;
 						//this clears out the div that will hold our account info
 
-						$("#listItemBox").empty();
-						$("#listItemBox").append("<thead><tr class='dbListTitle '>" +
+                        $("#feedbackListItemBox").empty();
+                        $("#feedbackListItemBox").append("<thead><tr class='dbListTitle '>" +
 							"<th>Reviewer</th>"+
 							"<th>Department</th>"+
 							"<th>Rating</th>"+ 
@@ -121,7 +116,7 @@
 								"<td>" + listsArray[i].approval + "</td>" + "</tr></tbody>"
 
 
-							$("#listItemBox").append(
+                            $("#feedbackListItemBox").append(
 								//anything we throw at our panel in the form of text
 								//will be added to the contents of that panel.  Here
 								acct
@@ -139,13 +134,90 @@
 					alert("boo...");
 				}
 			});
-		}
+        }
+
+        // Print screen function
 		function myFunction() {
 			window.print();
-		}
-		function hideReviewer() {
+        }
 
-		}
+        // Filter functions ------------------------------------------------------------------------------------------------------------------------------------------------
+        function hideReviewer() {
+            document.getElementById("hideReviewerCB").checked = true;
+            document.getElementById("unhideCB").checked = false;
+
+        }
+        function unhideReviewer() {
+            document.getElementById("hideReviewerCB").checked = false;
+            document.getElementById("unhideCB").checked = true;
+
+        }
+        function accountingFilter() {
+            document.getElementById("accountingCB").checked = true;
+            document.getElementById("iTCB").checked = false;
+        }
+        function ITFilter() {
+            document.getElementById("accountingCB").checked = false;
+            document.getElementById("iTCB").checked = true;
+        }
+        function rating1Filter() {
+            document.getElementById("1CB").checked = true;
+            document.getElementById("2CB").checked = false;
+            document.getElementById("3CB").checked = false;
+            document.getElementById("4CB").checked = false;
+            document.getElementById("5CB").checked = false;
+
+        }
+        function rating2Filter() {
+            document.getElementById("1CB").checked = false;
+            document.getElementById("2CB").checked = true;
+            document.getElementById("3CB").checked = false;
+            document.getElementById("4CB").checked = false;
+            document.getElementById("5CB").checked = false;
+
+        }
+        function rating3Filter() {
+            document.getElementById("1CB").checked = false;
+            document.getElementById("2CB").checked = false;
+            document.getElementById("3CB").checked = true;
+            document.getElementById("4CB").checked = false;
+            document.getElementById("5CB").checked = false;
+        }
+        function rating4Filter() {
+            document.getElementById("1CB").checked = false;
+            document.getElementById("2CB").checked = false;
+            document.getElementById("3CB").checked = false;
+            document.getElementById("4CB").checked = true;
+            document.getElementById("5CB").checked = false;
+        }
+        function rating5Filter() {
+            document.getElementById("1CB").checked = false;
+            document.getElementById("2CB").checked = false;
+            document.getElementById("3CB").checked = false;
+            document.getElementById("4CB").checked = false;
+            document.getElementById("5CB").checked = true;
+        }
+        function approvedFilter() {
+            document.getElementById("approvedCB").checked = true;
+            document.getElementById("notApprovedCB").checked = false;
+        }
+        function notApprovedFilter() {
+            document.getElementById("approvedCB").checked = false;
+            document.getElementById("notApprovedCB").checked = true;
+        }
+        function filterReset() {
+            document.getElementById("1CB").checked = false;
+            document.getElementById("2CB").checked = false;
+            document.getElementById("3CB").checked = false;
+            document.getElementById("4CB").checked = false;
+            document.getElementById("5CB").checked = false;
+            document.getElementById("hideReviewerCB").checked = false;
+            document.getElementById("unhideCB").checked = true;
+            document.getElementById("accountingCB").checked = false;
+            document.getElementById("iTCB").checked = false;
+            document.getElementById("approvedCB").checked = false;
+            document.getElementById("notApprovedCB").checked = false;
+        }
 
 
 	</script>
@@ -160,8 +232,8 @@
 				<div class="card-body">
 					<form>
 						<label class="form-check">
-							<input class="form-check-input" id="hideReviewerCB" type="checkbox" value="HideReviewer">***Hide reviewer*** <br>
-							<input class="form-check-input" id="unhideCB" type="checkbox" value="">Unhide<br>
+							<input class="form-check-input" id="hideReviewerCB" type="checkbox" value="HideReviewer" onclick="hideReviewer()" >***Hide reviewer*** <br>
+							<input class="form-check-input" id="unhideCB" type="checkbox" value="" onclick="unhideReviewer()" checked>Unhide<br>
 						</label>  <!-- form-check.// -->
 					</form>
 				</div> <!-- card-body.// -->
@@ -175,12 +247,10 @@
 				<div class="card-body">
 					<form>
 						<label class="form-check">
-							<input class="form-check-input" type="checkbox" value="">Operations<br>
-							<input class="form-check-input" type="checkbox" value="">Finance<br>
-							<input class="form-check-input" type="checkbox" value="">IT<br>
+							<input class="form-check-input" id="accountingCB" type="checkbox" value="" onclick="accountingFilter()">Accounting<br>
+							<input class="form-check-input" id="iTCB" type="checkbox" value="" onclick="ITFilter()">IT<br>
 						</label>  <!-- form-check.// -->
 					</form>
-
 				</div> <!-- card-body.// -->
 			</div>
 		</article>
@@ -192,11 +262,11 @@
 				<div class="card-body">
 					<form>
 						<label class="form-check">
-							<input class="form-check-input" type="checkbox" value="1">1<br>
-							<input class="form-check-input" type="checkbox" value="2">2<br>
-							<input class="form-check-input" type="checkbox" value="3">3<br>
-							<input class="form-check-input" type="checkbox" value="4">4<br>
-							<input class="form-check-input" type="checkbox" value="5">5<br>
+							<input class="form-check-input" id="1CB" type="checkbox" value="1" onclick="rating1Filter()">1<br>
+							<input class="form-check-input" id="2CB" type="checkbox" value="2" onclick="rating2Filter()">2<br>
+							<input class="form-check-input" id="3CB" type="checkbox" value="3" onclick="rating3Filter()">3<br>
+							<input class="form-check-input" id="4CB" type="checkbox" value="4" onclick="rating4Filter()">4<br>
+							<input class="form-check-input" id="5CB" type="checkbox" value="5" onclick="rating5Filter()">5<br>
 						</label>  <!-- form-check.// -->
 					</form>
 
@@ -211,8 +281,8 @@
 				<div class="card-body">
 					<form>
 						<label class="form-check">
-							<input class="form-check-input" type="checkbox" value="1">Approved<br>
-							<input class="form-check-input" type="checkbox" value="0">Waiting for approval<br>
+							<input class="form-check-input" id="approvedCB" type="checkbox" value="1" onclick="approvedFilter()">Approved<br>
+							<input class="form-check-input" id="notApprovedCB" type="checkbox" value="0" onclick="notApprovedFilter()">Waiting for approval<br>
 						</label>  <!-- form-check.// -->
 					</form>
 				</div> <!-- card-body.// -->
@@ -220,22 +290,11 @@
 		</article>
 		<article class="card-group-item">
 			<header class="card-header">
-				<h6 class="title">        </h6>
+                <button onclick="filterReset()">Reset</button>
 			</header>
 		</article>
 	</div>
-	<table class=" table table-hover col-9" id="listItemBox">
-		<!--<tr class="dbListTitle ">
-			<th>Reviewer</th>
-			<th>Department</th>
-			<th>Rating</th>
-			<th>Comment</th>
-			<th>Approval</th>
-			<th><button onclick="myFunction()">Print this page</button></th>
-		</tr>-->
-		<!--<tr class="listItemBox" id="listItemBox">
-
-		</tr>-->
+	<table class=" table table-hover col-9" id="feedbackListItemBox">
 	</table>
 </body>
 </html>
