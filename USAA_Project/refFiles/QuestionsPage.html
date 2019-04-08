@@ -45,13 +45,16 @@
 
                                 
                                 if (questionsArray[i].QuestionType == "Rating") {
-                                    input.type = "radio";
-                                    input.id = questionsArray[i].QuestionID;
                                     $("#questionBox").append("<tr>" + "<td>");
 
-                                    for (var i = 0; i < 5; i++) {
-                                        input.value = i+1;
+                                    for (var j = 0; j < 5; j++) {
+                                        input = document.createElement('input');
+                                        input.type = "radio";
+                                        input.id = questionsArray[i].QuestionID;
+                                        input.name = "test";
+                                        input.value = j+1;
                                         $("#questionBox").append(input, input.value);
+                                        feedbackArray.push([input, false, input.id]);
                                     }
 
                                     $("#questionBox").append("</td>" + "</tr>");
@@ -60,9 +63,8 @@
                                     input.type = "text";
                                     input.id = questionsArray[i].QuestionID;
                                     $("#questionBox").append("<tr>" + "<td>", input, "</td>" + "</tr>");
+                                    feedbackArray.push([input, false, input.id]);
                                 }
-
-                                feedbackArray.push([input, false, input.id]);
                             }
                         }
                     }
