@@ -15,7 +15,12 @@
     </style>
 
     <script>
+        var userDept;
+        userDept = "Accounting"// dummy date
+
         var questionsArray;
+        var feedbackArray = [];// Feedback Array. FeedbackID, Feedback(response), approved?, QuestionID
+
         function loadQuestions() {
             var webMethod = "QuestionsService.asmx/GetQuestions";
             $.ajax({
@@ -26,16 +31,41 @@
                 success: function (msg) {
                     if (msg.d.length > 0) {
                         questionsArray = msg.d;
-                        $("#questionBox").empty();
+
                         for (var i = 0; i < questionsArray.length; i++) {
-                            var qstn;
-                            qstn = "<td>" + questionsArray[i].QuestionID + "</td>" +
+                            if (questionsArray[i].DepartmentName == userDept) {
+                                $("#questionBox").append("<tr>" +
+                                //"<td>" + questionsArray[i].QuestionID + "</td>" +
                                 "<td>" + questionsArray[i].Question + "</td>" +
-                                "<td>" + questionsArray[i].QuestionType + "</td>" +
-                                "<td>" + questionsArray[i].DepartmentName + "</td>"
-                            $("#questionBox").append(
-                                qstn
-                            );
+                                //"<td>" + questionsArray[i].QuestionType + "</td>" +
+                                //"<td>" + questionsArray[i].DepartmentName + "</td>" +
+                                    "</tr>");
+
+                                var input = document.createElement('input');
+
+                                
+                                if (questionsArray[i].QuestionType == "Rating") {
+                                    $("#questionBox").append("<tr>" + "<td>");
+
+                                    for (var j = 0; j < 5; j++) {
+                                        input = document.createElement('input');
+                                        input.type = "radio";
+                                        input.id = questionsArray[i].QuestionID;
+                                        input.name = "test";
+                                        input.value = j+1;
+                                        $("#questionBox").append(input, input.value);
+                                        feedbackArray.push([input, false, input.id]);
+                                    }
+
+                                    $("#questionBox").append("</td>" + "</tr>");
+                                }
+                                else if (questionsArray[i].QuestionType == "Textbox") {
+                                    input.type = "text";
+                                    input.id = questionsArray[i].QuestionID;
+                                    $("#questionBox").append("<tr>" + "<td>", input, "</td>" + "</tr>");
+                                    feedbackArray.push([input, false, input.id]);
+                                }
+                            }
                         }
                     }
                     accountWindowShowing = true;
@@ -45,17 +75,30 @@
                 }
             });
         }
+
+        function submitFeedback() {
+            // input.id = question id
+            for (var i = 0; i < feedbackArray.length; i++) {
+                userFeedbackInput = feedbackArray[i][0];
+                if (userFeedbackInput.type == 'radio' && userFeedbackInput.checked) {
+                    console.log("WOWIE~");
+                }
+                console.log(feedbackArray[i][0].value);
+            }
+            
+        }
+
     </script>
 </head>
 <body onload="loadQuestions()">
-    <table class="center">
-        <tr class="dbQuestionsTitle">
-            <th>QuestionID</th>
+    <table class="center, questionBox" id="questionBox">
+        <tr>
+            <!--<th>QuestionID</th>-->
             <th>Question</th>
-            <th>QuestionType</th>
-            <th>DepartmentName</th>
+            <!--<th>QuestionType</th>
+    <th>DepartmentName</th>-->
         </tr>
-        <tr class="questionBox" id="questionBox"></tr>
     </table>
+    <input type="submit" id="submitButton" onclick="submitFeedback()"/>
 </body>
 </html>
