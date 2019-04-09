@@ -22,7 +22,7 @@
         var feedbackArray = [];// Feedback Array. FeedbackID, Feedback(response), approved?, QuestionID
 
         function loadQuestions() {
-            var webMethod = "QuestionsService.asmx/GetQuestions";
+            var webMethod = "../QuestionsService.asmx/GetQuestions";
             $.ajax({
                 type: "POST",
                 url: webMethod,
