@@ -12,5 +12,6 @@ namespace USAA_Project
         public int rating;
         public string comment;
         public int approval;
+        public int feedbackId;
     }
 }
