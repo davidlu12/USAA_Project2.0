@@ -22,7 +22,7 @@
         var feedbackArray = [];// Feedback Array. FeedbackID, Feedback(response), approved?, QuestionID
 
         function loadQuestions() {
-            var webMethod = "QuestionsService.asmx/GetQuestions";
+            var webMethod = "../QuestionsService.asmx/GetQuestions";
             $.ajax({
                 type: "POST",
                 url: webMethod,
@@ -81,9 +81,13 @@
             for (var i = 0; i < feedbackArray.length; i++) {
                 userFeedbackInput = feedbackArray[i][0];
                 if (userFeedbackInput.type == 'radio' && userFeedbackInput.checked) {
-                    console.log("WOWIE~");
+                    console.log(userFeedbackInput.value);
                 }
-                console.log(feedbackArray[i][0].value);
+                else if (userFeedbackInput.type == 'text') {
+                    console.log(userFeedbackInput.value);
+                }
+
+                //console.log(feedbackArray[i][0].value);
             }
             
         }
