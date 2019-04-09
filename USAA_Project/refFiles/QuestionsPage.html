@@ -8,10 +8,10 @@
     <title>QuestionsPage</title>
 
     <style>
-        .dbQuestionsTitle {
+        /*.dbQuestionsTitle {
             overflow: hidden;
             background-color: rgba(0,0,0,.03);
-        }
+        }*/
     </style>
 
     <script>
@@ -43,27 +43,27 @@
 
                                 var input = document.createElement('input');
 
-                                
                                 if (questionsArray[i].QuestionType == "Rating") {
-                                    $("#questionBox").append("<tr>" + "<td>");
 
-                                    for (var j = 0; j < 5; j++) {
+                                    $("#questionBox").append("<tr>");
+
+                                    for (var j = 0; j < 4; j++) {
                                         input = document.createElement('input');
                                         input.type = "radio";
                                         input.id = questionsArray[i].QuestionID;
                                         input.name = "test";
                                         input.value = j+1;
-                                        $("#questionBox").append(input, input.value);
+                                        $("#questionBox").append("<tr>" + "<td>", input, input.value, "</td>" + "</tr>");
                                         feedbackArray.push([input, false, input.id]);
                                     }
-
-                                    $("#questionBox").append("</td>" + "</tr>");
+                                    $("#questionBox").append("</tr>");
                                 }
                                 else if (questionsArray[i].QuestionType == "Textbox") {
                                     input.type = "text";
                                     input.id = questionsArray[i].QuestionID;
                                     $("#questionBox").append("<tr>" + "<td>", input, "</td>" + "</tr>");
                                     feedbackArray.push([input, false, input.id]);
+
                                 }
                             }
                         }
