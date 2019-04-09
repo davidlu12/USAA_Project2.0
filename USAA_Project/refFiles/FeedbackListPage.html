@@ -122,9 +122,9 @@
                                 "<td>" + listsArray[i].comment + "</td>" 
 
                             var approvalChecked;
-                            approvalChecked = "<td>" + "<input id='" + listsArray[i].feedbackId + " 'type='checkbox' checked><br>" + "</td>" + "</tr></tbody>"
+                            approvalChecked = "<td>" + "<button onclick='EditFeedback(" + listsArray[i].feedbackId + ")' disabled>Approved</button>" + "</td>" + "</tr></tbody>"
                             var approvalNotChecked;
-                            approvalNotChecked = "<td>" + "<input id='" + listsArray[i].feedbackId + " 'type='checkbox' ><br>" + "</td>" + "</tr></tbody>"
+                            approvalNotChecked = "<td>" + "<button onclick='EditFeedback(" + listsArray[i].feedbackId + ")' >Click to Approve</button>" + "</td>" + "</tr></tbody>"
 
 
                             if (reviewerFilter == 1) {
@@ -172,7 +172,28 @@
 			});
         }
 
-        // Print screen function
+        //ajax to send the edits of an item to the server -------------------------------------------------------------------------------------------------------------------------
+        function EditFeedback(feedbackId) {
+            var webMethod = "../FeedbackListServices.asmx/ApproveFeedback";
+            var parameters = "{\"id\":\"" + encodeURI(feedbackId) + "\",\"approval\":\"" + "1"+ "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    //showPanel('listPanel');
+                    LoadList();
+                },
+                error: function (e) {
+                    alert("boo...");
+                }
+            });
+        }
+
+        // Print screen function -------------------------------------------------------------------------------------------------------------------------------------------
 		function myFunction() {
 			window.print();
         }
@@ -241,15 +262,6 @@
             document.getElementById("4CB").checked = true;
             document.getElementById("5CB").checked = false;
             ratingFilter = 4;
-            LoadList()
-        }
-        function rating5Filter() {
-            document.getElementById("1CB").checked = false;
-            document.getElementById("2CB").checked = false;
-            document.getElementById("3CB").checked = false;
-            document.getElementById("4CB").checked = false;
-            document.getElementById("5CB").checked = true;
-            ratingFilter = 5;
             LoadList()
         }
         function approvedFilter() {
@@ -330,7 +342,6 @@
 							<input class="form-check-input" id="2CB" type="checkbox" value="2" onclick="rating2Filter()">2<br>
 							<input class="form-check-input" id="3CB" type="checkbox" value="3" onclick="rating3Filter()">3<br>
 							<input class="form-check-input" id="4CB" type="checkbox" value="4" onclick="rating4Filter()">4<br>
-							<input class="form-check-input" id="5CB" type="checkbox" value="5" onclick="rating5Filter()">5<br>
 						</label>  <!-- form-check.// -->
 					</form>
 
