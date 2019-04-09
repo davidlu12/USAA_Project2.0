@@ -1,4 +1,4 @@
-﻿html, body {
+﻿/*html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,9 +10,9 @@
     overflow-x: hidden;
     font-family: Gotham,Arial,sans-serif;
     background-color: #3e4042;
-}
+}*/
 
-.menu {
+/*.menu {
     flex: 1;
     text-align: right;
     color: #bbbbbb;
@@ -25,7 +25,7 @@
 }
  .h3, h3 {
     text-align: left;
-}
+}*/
 
 .contentContainer {
     flex: 1;
