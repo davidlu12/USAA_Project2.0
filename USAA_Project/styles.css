@@ -49,25 +49,6 @@
     align-content: center;
 }
 
-.listPanel {
-text-align: center;
-}
-
-.accountsPanel {
-    text-align: center;
-}
-
-#requestsPanel, #accountsPanel {
-    background-color: white;
-    margin: 0% 30%;
-    width: 40%;
-}
-
-    #accountsPanel div, #requestsPanel div {
-        padding: 10px;
-        margin: 5px;
-    }
-
 
 .logonBox {
     display: inline-block;
@@ -100,9 +81,9 @@ text-align: center;
     padding: 10px 20px;
 }
 
-    .logonBox input:focus {
-        border: 2px solid #555;
-    }
+.logonBox input:focus {
+    border: 2px solid #555;
+}
 
 .logonBox button {
     width: 100%;
@@ -111,71 +92,6 @@ text-align: center;
     font-size: 15px;
     cursor: pointer;
     border: 1px;
-}
-
-
-.newAccountPanel {
-    text-align: center;
-}
-
-.newAccountBox {
-    display: inline-block;
-    text-align: right;
-    background-color: white;
-    height: 600px;
-    margin: 80px;
-    width: 400px;
-}
-
-    .newAccountBox div {
-        padding: 10px;
-        margin-top: 5px;
-        margin-left: 25px;
-        margin-right: 25px;
-    }
-
-    .newAccountBox input {
-        width: 100%;
-        border: 0px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        height: 30px;
-        font-size: 15px;
-        background-color: #f2f2f2;
-        padding: 10px 20px;
-    }
-
-        .newAccountBox input:focus {
-            border: 2px solid #555;
-        }
-
-    .newAccountBox button {
-        width: 100%;
-        height: 30px;
-        background-color: #3cb371;
-        color: white;
-        font-size: 15px;
-        cursor: pointer;
-        border: 0px;
-    }
-
-.accountsBox {
-    display: inline-block;
-    width: 100%;
-}
-
-    .accountsBox hr {
-        padding: 0px;
-        margin-left: auto;
-        margin-right: auto;
-        width: 40px;
-    }
-
-.accountRow {
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
 }
 
 .chatPanel {
@@ -430,3 +346,69 @@ button, option {
     background-color: white;
     color: #1A3258;
 }
+
+body {
+    height: 100%;
+}
+
+body {
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: rgba(0,0,0,.125);
+}
+
+table {
+    width: 70%;
+    margin-right: 5%;
+    margin: auto;
+    text-align: center;
+    margin-top: 0;
+}
+
+.filteredOptionsTable {
+    background-color: #1A3258;
+}
+
+.card-header {
+    color: white;
+}
+
+.filter-content {
+    background-color: white;
+}
+
+.dbListTitle {
+    overflow: hidden;
+    background-color: white;
+}
+
+button {
+    background-color: #1A3258;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: white;
+    color: #1A3258;
+    border: 2px solid #1A3258;
+}
+
+th {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #1A3258;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    color: white;
+}	
+
+.menu {
+    width: 100%;
+    text-align: right;
+    float: none;
+}
+
