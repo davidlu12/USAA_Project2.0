@@ -416,3 +416,7 @@ C:\Users\Fanggari\Source\Repos\USAA_Project2.0\USAA_Project\obj\Debug\USAA_Proje
 C:\Users\Fanggari\Source\Repos\USAA_Project2.0\USAA_Project\obj\Debug\USAA_Project.csproj.CopyComplete
 C:\Users\Fanggari\Source\Repos\USAA_Project2.0\USAA_Project\obj\Debug\USAA_Project.dll
 C:\Users\Fanggari\Source\Repos\USAA_Project2.0\USAA_Project\obj\Debug\USAA_Project.pdb
+C:\Users\Administrator\Source\Repos\USAA_Project2.03\USAA_Project\obj\Debug\USAA_Project.csprojAssemblyReference.cache
+C:\Users\Administrator\Source\Repos\USAA_Project2.03\USAA_Project\obj\Debug\USAA_Project.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\USAA_Project2.03\USAA_Project\obj\Debug\USAA_Project.dll
+C:\Users\Administrator\Source\Repos\USAA_Project2.03\USAA_Project\obj\Debug\USAA_Project.pdb
