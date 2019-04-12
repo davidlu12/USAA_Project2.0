@@ -58,7 +58,7 @@ namespace USAA_Project
         }
 
         [WebMethod(EnableSession = true)]
-        public void AddResponseToList(string name, string department, string, question, int rating, string comment){
+        public void AddResponseToList(string name, string department, string question, string rating, string comment){
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
             //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
             //does is tell mySql server to return the primary key of the last inserted row.

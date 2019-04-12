@@ -23,9 +23,10 @@
 
     <div class="contentContainer">
 
+        <!--Logon Panel-->
         <div id="logonPanel" class="contentPanel logonPanel">
-			<form class="form-signin" onsubmit="LogOn($('#inputEmail').val(), $('#inputPassword').val());return false;">
-				<img class="mb-4" src="\img\USAA.jfif" alt="" width="300" height="250">
+            <form class="form-signin" onsubmit="LogOn($('#inputEmail').val(), $('#inputPassword').val());return false;">
+                <img class="mb-4" src="\img\USAA.jfif" alt="" width="300" height="250">
                 <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                 <label for="inputEmail" class="sr-only"></label>
                 <input type="text" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
@@ -39,6 +40,7 @@
             </form>
         </div>
 
+        <!--department Panel-->
         <div id="departmentsPanel" class="contentPanel">
             <h1 class="text-center mb-4 font-weight-bolder">Departments</h1>
             <h3 class="text-center mb-sm-1 font-italic">Select department to give feedback.</h3>
@@ -51,11 +53,11 @@
                         <button class="col">
                             Finance & Accounting
                             <!--<select>
-                                <option value="accountsPayable">Accounts Payable</option>
-                                <option value="accountsReceivable">Accounts Receivable</option>
-                                <option value="financialReporting">Financial Reporting</option>
-                                <option value="payroll">Payroll</option>
-                            </select>-->
+                            <option value="accountsPayable">Accounts Payable</option>
+                            <option value="accountsReceivable">Accounts Receivable</option>
+                            <option value="financialReporting">Financial Reporting</option>
+                            <option value="payroll">Payroll</option>
+                        </select>-->
                         </button>
                     </div>
                     <div class="row">
@@ -63,11 +65,11 @@
                         <button class="col" onclick="ITQuestionsPage()">
                             Information Technology
                             <!--<select>
-                                <option value="dataAnalytics">Data Analytics</option>
-                                <option value="mobileDevelopment">Mobile Development</option>
-                                <option value="techSupport">Technical Support</option>
-                                <option value="webDevelopment">Web Development</option>
-                            </select>-->
+                            <option value="dataAnalytics">Data Analytics</option>
+                            <option value="mobileDevelopment">Mobile Development</option>
+                            <option value="techSupport">Technical Support</option>
+                            <option value="webDevelopment">Web Development</option>
+                        </select>-->
                         </button>
                         <button class="col">Legal</button>
                     </div>
@@ -82,16 +84,16 @@
                         <button class="col">
                             <strong>Other</strong>
                             <!--<select>
-                                <option value="advancement">Advancement</option>
-                                <option value="benefits">Benefits</option>
-                                <option value="companyCulture">Company Culture</option>
-                                <option value="environment">Environment</option>
-                                <option value="ethics">Ethics</option>
-                                <option value="flexibility">Flexibility</option>
-                                <option value="compensation">Compensation</option>
-                                <option value="recognition">Recognition</option>
-                                <option value="vacationTime">Vacation Time</option>
-                            </select>-->
+                            <option value="advancement">Advancement</option>
+                            <option value="benefits">Benefits</option>
+                            <option value="companyCulture">Company Culture</option>
+                            <option value="environment">Environment</option>
+                            <option value="ethics">Ethics</option>
+                            <option value="flexibility">Flexibility</option>
+                            <option value="compensation">Compensation</option>
+                            <option value="recognition">Recognition</option>
+                            <option value="vacationTime">Vacation Time</option>
+                        </select>-->
                         </button>
                     </div>
                 </div>
@@ -99,6 +101,7 @@
             </div>
         </div>
 
+        <!--feedbacklist Panel-->
         <div id="feedbackListPanel" class="contentPanel">
             <div class="filteredOptionsTable col-2">
                 <article class="card-group-item">
