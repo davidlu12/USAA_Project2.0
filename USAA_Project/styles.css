@@ -64,7 +64,7 @@
 		border: 2px solid #1A3258;
 	}
 
-#logonPanel h1, label {
+#logonPanel h1 {
 	color: white;
 }
 
@@ -100,14 +100,18 @@
         margin-bottom: 10px;
     }
 
-.row {
-    width: 100%;
-    padding: 15px;
-    margin: auto;
+#departmentsPanel .row {
+	width: 100%;
+	padding: 15px;
+	margin: auto;
 }
 
-.col {
-    height: 90px;
+#departmentsPanel .col {
+	height: 90px;
+}
+
+#departmentsPanel h1, #departmentsPanel h3 {
+	color: white;
 }
 
 #departmentsPanel button, option {
@@ -115,24 +119,30 @@
 	color: #1A3258;
 }
 
-table {
-    width: 70%;
-    margin-right: 5%;
-    margin: auto;
-    text-align: center;
-    margin-top: 0;
+#feedbackListPanel table {
+	width: 70%;
+	margin-right: 5%;
+	margin: auto;
+	text-align: center;
+	margin-top: 0;
+}
+
+#feedbackListPanel {
+	background-color: white;
 }
 
 .filteredOptionsTable {
-    background-color: #1A3258;
+	background-color: #1A3258;
+
 }
 
-.card-header {
-    color: white;
+#feedbackListPanel .card-header {
+	color: white;
 }
 
-.filter-content {
-    background-color: white;
+#feedbackListPanel .filter-content {
+	background-color: white;
+	
 }
 
 .dbListTitle {
@@ -140,13 +150,26 @@ table {
     background-color: white;
 }
 
+#feedbackListPanel th {
+	padding: .75rem 1.25rem;
+	margin-bottom: 0;
+	background-color: #1A3258;
+	border-bottom: 1px solid rgba(0,0,0,.125);
+	color: white;
+}
 
-th {
-    padding: .75rem 1.25rem;
-    margin-bottom: 0;
-    background-color: #1A3258;
-    border-bottom: 1px solid rgba(0,0,0,.125);
-    color: white;
-}	
+#feedbackListPanel button {
+	background-color: #1A3258;
+	color: white;
+	border: 2px solid white;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+	#feedbackListPanel button:hover {
+		background-color: white;
+		color: #1A3258;
+		border: 2px solid #1A3258;
+	}
 
 
