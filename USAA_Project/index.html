@@ -17,28 +17,26 @@
 
     <div class="titleContainer">
         <div id="menu" class="menu">
-            <a href="#" onclick="LogOff()">log off</a>
+            <a href="#" onclick="LogOff()">Log Off</a>
         </div>
     </div>
+
     <div class="contentContainer">
 
         <div id="logonPanel" class="contentPanel logonPanel">
-            <div class="logonBox">
-                <form class="form-signin" onsubmit="LogOn($('#inputEmail').val(), $('#inputPassword').val());return false;">
-                    <img class="mb-4" src="\img\USAA.jfif" alt="" width="300" height="250">
-                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                    <label for="inputEmail" class="sr-only"></label>
-                    <input type="text" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
-                    <label for="inputPassword" class="sr-only"></label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+			<form class="form-signin" onsubmit="LogOn($('#inputEmail').val(), $('#inputPassword').val());return false;">
+				<img class="mb-4" src="\img\USAA.jfif" alt="" width="300" height="250">
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <label for="inputEmail" class="sr-only"></label>
+                <input type="text" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
+                <label for="inputPassword" class="sr-only"></label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
-                    <br>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+                <br>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
 
-                    <p class="mt-5 mb-3 text-muted">&copy; 2019 Scrum and Scrummer</p>
-                </form>
-
-            </div>
+                <p class="mt-5 mb-3 text-muted">&copy; 2019 Scrum and Scrummer</p>
+            </form>
         </div>
 
         <div id="departmentsPanel" class="contentPanel">
@@ -185,12 +183,6 @@
             <h1>Thanks for your feedback!</h1>
             <button onclick="BackToDepartments()">Click here to continue...</button>
         </div>
-        <!--Removed listPanel-->
-        <!--Removed requestPanel-->
-        <!--Removed newAccountPanel-->
-        <!--Removed editAccountPanel-->
-        <!--Add questionsPanel Here-->
-
     </div>
 
 
