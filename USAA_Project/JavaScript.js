@@ -1,12 +1,12 @@
 ﻿//we're using a stacked card approach for our main viewing area
 //this array holds the ids of our cards and the method
 //allows us to easly switch the interface from one to the other
-var contentPanels = ['logonPanel','departmentsPanel', 'questionsPanel', 'feedbackListPanel'];
+var contentPanels = ['logonPanel', 'departmentsPanel', 'questionsPanel', 'feedbackListPanel', 'thankYouPanel'];
 //this function toggles which panel is showing, and also clears data from all panels
 function showPanel(panelId) {
-    clearData();
+    //clearData();
     for (var i = 0; i < contentPanels.length; i++) {
-        if (panelId == contentPanels[i]) {
+        if (panelId === contentPanels[i]) {
             $("#" + contentPanels[i]).css("visibility", "visible");
         }
         else {
@@ -17,11 +17,7 @@ function showPanel(panelId) {
 
 //this function clears data from all panels
 function clearData() {
-    $("#accountsBox").empty();
-    $("#requestsBox").empty();
-    clearNewAccount();
     clearLogon();
-    clearEditAccount();
 }
 
 //HERE'S AN EXAMPLE OF AN AJAX CALL WITH JQUERY!
@@ -39,7 +35,7 @@ function LogOn(userId, pass) {
         success: function (msg) {
             if (msg.d) {
                 //server replied true, so show the departments panel
-                showPanel("departmentsPanel");
+                //showPanel("departmentsPanel");
                 LoadAccounts();
             }
             else {
@@ -71,8 +67,6 @@ function LoadAccounts() {
                 //server into our accountsArray variable
                 //so we can use them in other functions as well
                 accountsArray = msg.d;
-                //this clears out the div that will hold our account info
-                $("#accountsBox").empty();
                 //again, we assume we're not an admin unless we see data from the server
                 //that we know only admins can see
                 admin = false;
@@ -82,19 +76,10 @@ function LoadAccounts() {
                     var acct;
                     //if they have access to admin-level info (like userid and password) then
                     //create output that has an edit option
-                    if (accountsArray[i].userId != null) {
-                        acct = "<div class='accountRow' id='acct" + accountsArray[i].id + "'>" +
-                            "<a class='nameTag' href='mailto:" + accountsArray[i].email + "'>" +
-                            accountsArray[i].firstName + " " + accountsArray[i].lastName +
-                            "</a> <a href='#' onclick='LoadAccount(" + accountsArray[i].id + ")' class='optionsTag'>edit</a></div><hr>"
+                    if (accountsArray[i].userId !== null) {
                         admin = true;
-                        $("#accountsBox").append(
-                            //anything we throw at our panel in the form of text
-                            //will be added to the contents of that panel.  Here
-                            //we're putting together a div that holds info on the
-                            //account as well as an edit link if the user is an admin
-                            acct
-                        );
+                        showPanel('feedbackListPanel');
+                        filterReset();
                     }
                     //if not, then they're not an admin so don't include the edit option
                     else {
@@ -102,183 +87,24 @@ function LoadAccounts() {
                             "<a class='nameTag' href='mailto:" + accountsArray[i].email + "'>" +
                             accountsArray[i].firstName + " " + accountsArray[i].lastName +
                             "</a></div><hr>"*/
-                        showPanel('listPanel');
-                        $("#listItemBox").empty();
-                        LoadList()
-                        LoadStores()
+                        showPanel('departmentsPanel');
+                        LoadList();
+                      
                     }
 
                 }
             }
-            //we're showing the account window, so let's track that...
-            accountWindowShowing = true;
-            //...because the ShowMenu function behaves differently depending on
-            //if the account window is showing or not
-            ShowMenu();
         },
         error: function (e) {
             alert("boo...");
         }
     });
-}
-
-//this is just like loading accounts!
-function LoadRequests() {
-    var webMethod = "AccountServices.asmx/GetAccountRequests";
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            if (msg.d.length > 0) {
-                $("#requestsBox").empty();
-                admin = false;
-                for (var i = 0; i < msg.d.length; i++) {
-                    req = "<div class='accountRow' id='acctR" + msg.d[i].id + "'>" +
-                        "<span class='nameTag'>" +
-                        msg.d[i].firstName + " " + msg.d[i].lastName +
-                        "</span> <span class='optionsTag'><a href='#' onclick='approveAccount(" + msg.d[i].id + ")'>yes</a> / " +
-                        "<a href='#' onclick='rejectAccount(" + msg.d[i].id + ")'>no</a></span>" +
-                        "<div style='font-size: smaller'>" + msg.d[i].email + "</div></div > <hr>";
-                    $("#requestsBox").append(req);
-                }
-            }
-            accountWindowShowing = false;
-            ShowMenu();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
-
-//a simple ajax call that passes the id to be approved
-function approveAccount(id) {
-    var webMethod = "AccountServices.asmx/ActivateAccount";
-    var parameters = "{\"id\":\"" + encodeURI(id) + "\"}";
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            showPanel('requestsPanel');
-            LoadRequests();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
-
-//virtually identical with approve
-function rejectAccount(id) {
-    var webMethod = "AccountServices.asmx/RejectAccount";
-    var parameters = "{\"id\":\"" + encodeURI(id) + "\"}";
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            showPanel('requestsPanel');
-            LoadRequests();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
-
-//here's the variable to track if the account window is showing
-var accountWindowShowing = false;
-//and here's a function that adjusts the menu options if you're an admin or a user
-//and if you're looking at accounts or requests
-function ShowMenu() {
-
-    $("#menu").css("visibility", "visible");
-    if (admin) {
-        if (accountWindowShowing) {
-            $("#adminLink").text("requests");
-        }
-        else {
-            $("#adminLink").text("accounts");
-        }
-    }
-}
-
-//just hides the menu
-function HideMenu() {
-
-    $("#menu").css("visibility", "hidden");
-    $("#adminLink").text("");
-}
-
-//when an admin clicks either accounts or requests,
-//they're shown the appropriate screen
-function adminClick() {
-    if (accountWindowShowing) {
-        //show requests
-        showPanel('requestsPanel');
-        accountWindowShowing = false;
-        LoadRequests()
-        ShowMenu();
-    }
-    else {
-        showPanel('accountsPanel');
-        LoadAccounts();
-        ShowMenu();
-    }
-}
-
-//resets the new account inputs
-function clearNewAccount() {
-    $('#newLogonId').val("");
-    $('#newLogonPassword').val("");
-    $('#newLogonFName').val("");
-    $('#newLogonLName').val("");
-    $('#newLogonEmail').val("");
-}
-
-//resets the edit account inputs
-function clearEditAccount() {
-    $('#editLogonId').val("");
-    $('#editLogonPassword').val("");
-    $('#editLogonFName').val("");
-    $('#editLogonLName').val("");
-    $('#editLogonEmail').val("");
 }
 
 //resets the logon inputs
 function clearLogon() {
     $('#logonId').val("");
     $('#logonPassword').val("");
-}
-
-//passes account info to the server, to create an account request
-function CreateAccount(id, pass, fname, lname, email) {
-    var webMethod = "AccountServices.asmx/RequestAccount";
-    var parameters = "{\"uid\":\"" + encodeURI(id) + "\",\"pass\":\"" + encodeURI(pass) + "\",\"firstName\":\"" + encodeURI(fname) + "\",\"lastName\":\"" + encodeURI(lname) + "\",\"email\":\"" + encodeURI(email) + "\"}";
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            showPanel('logonPanel');
-            alert("Account request pending approval...");
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
 }
 
 //logs the user off both at the client and at the server
@@ -296,9 +122,7 @@ function LogOff() {
                 //stop checking messages
                 //and clear the chat panel
                 showPanel('logonPanel');
-                HideMenu();
-            }
-            else {
+                clearLogon();
             }
         },
         error: function (e) {
@@ -315,11 +139,19 @@ jQuery(function () {
     showPanel('logonPanel');
 });
 
-//an ajax to kill an account
-function DeactivateAccount() {
-    var webMethod = "AccountServices.asmx/DeleteAccount";
-    var parameters = "{\"id\":\"" + encodeURI(currentAccount.id) + "\"}";
 
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+// Functions for feedBackListPage below -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+$('input[type="checkbox"]').on('change', function () {
+    $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+});
+var listsArray;
+
+//this function grabs lists and loads our list window
+function LoadList() {
+    var webMethod = "FeedbackListServices.asmx/GetList";
+    var parameters = "{\"departmentFilter\":\"" + encodeURI(departmentFilter) + "\",\"ratingFilter\":\"" + encodeURI(ratingFilter) + "\",\"approvalFilter\":\"" + encodeURI(approvalFilter) + "\"}";
     $.ajax({
         type: "POST",
         url: webMethod,
@@ -327,8 +159,81 @@ function DeactivateAccount() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            showPanel('accountsPanel');
-            LoadAccounts();
+            if (msg.d.length > 0) {
+                //let's put our accounts that we get from the
+                //server into our accountsArray variable
+                //so we can use them in other functions as well
+                listsArray = msg.d;
+                //this clears out the div that will hold our account info
+
+                $("#feedbackListItemBox").empty();
+                $("#feedbackListItemBox").append("<thead><tr class='dbListTitle '>" +
+                    "<th>Reviewer</th>" +
+                    "<th>Department</th>" +
+                    "<th>Rating</th>" +
+                    "<th>Comment</th>" +
+                    "<th>Approval</th>" +
+                    "<th><button onclick='myFunction()'>Print...</button></th></tr></thead>"
+                );
+                for (var i = 0; i < listsArray.length; i++) {
+                    //we grab on to a specific html element in jQuery
+                    //by using a  # followed by that element's id.
+                    var acct;
+                    acct = "<tbody><tr>" + "<td>" + listsArray[i].reviewer + "</td>" +
+                        "<td>" + listsArray[i].department + "</td>" +
+                        "<td>" + listsArray[i].rating + "</td>" +
+                        "<td>" + listsArray[i].comment + "</td>"
+
+                    var acctUserHidden;
+                    acctUserHidden = "<tbody><tr>" + "<td> ****** </td>" +
+                        "<td>" + listsArray[i].department + "</td>" +
+                        "<td>" + listsArray[i].rating + "</td>" +
+                        "<td>" + listsArray[i].comment + "</td>"
+
+                    var approvalChecked;
+                    approvalChecked = "<td>" + "<button onclick='EditFeedback(" + listsArray[i].feedbackId + ")' disabled>Approved</button>" + "</td>" + "</tr></tbody>"
+                    var approvalNotChecked;
+                    approvalNotChecked = "<td>" + "<button onclick='EditFeedback(" + listsArray[i].feedbackId + ")' >Click to Approve</button>" + "</td>" + "</tr></tbody>"
+
+
+                    if (reviewerFilter === 1) {
+                        if (listsArray[i].approval === 1) {
+                            $("#feedbackListItemBox").append(
+                                //anything we throw at our panel in the form of text
+                                //will be added to the contents of that panel.  Here
+                                acctUserHidden + approvalChecked
+                            );
+                        }
+                        else {
+                            $("#feedbackListItemBox").append(
+                                //anything we throw at our panel in the form of text
+                                //will be added to the contents of that panel.  Here
+                                acctUserHidden + approvalNotChecked
+                            );
+                        }
+                    } else if (listsArray[i].approval === 1) {
+                        $("#feedbackListItemBox").append(
+                            //anything we throw at our panel in the form of text
+                            //will be added to the contents of that panel.  Here
+                            acct + approvalChecked
+                        );
+                    }
+                    else {
+                        $("#feedbackListItemBox").append(
+                            //anything we throw at our panel in the form of text
+                            //will be added to the contents of that panel.  Here
+                            acct + approvalNotChecked
+                        );
+                    }
+
+
+                }
+            }
+            //we're showing the account window, so let's track that...
+            accountWindowShowing = true;
+            //...because the ShowMenu function behaves differently depending on
+            //if the account window is showing or not
+            //ShowMenu();
         },
         error: function (e) {
             alert("boo...");
@@ -336,32 +241,10 @@ function DeactivateAccount() {
     });
 }
 
-//hold on to the account being currently edited here
-var currentAccount;
-//load up an account for editing
-function LoadAccount(id) {
-    showPanel('editAccountPanel');
-    currentAccount = null;
-    //find the account with a matching id in our array
-    for (var i = 0; i < accountsArray.length; i++) {
-        if (accountsArray[i].id == id) {
-            currentAccount = accountsArray[i]
-        }
-    }
-    //set up our inputs
-    if (currentAccount != null) {
-        $('#editLogonId').val(currentAccount.userId);
-        $('#editLogonPassword').val(currentAccount.password);
-        $('#editLogonFName').val(currentAccount.firstName);
-        $('#editLogonLName').val(currentAccount.lastName);
-        $('#editLogonEmail').val(currentAccount.email);
-    }
-}
-
-//ajax to send the edits of an account to the server
-function EditAccount() {
-    var webMethod = "AccountServices.asmx/UpdateAccount";
-    var parameters = "{\"id\":\"" + encodeURI(currentAccount.id) + "\",\"uid\":\"" + encodeURI($('#editLogonId').val()) + "\",\"pass\":\"" + encodeURI($('#editLogonPassword').val()) + "\",\"firstName\":\"" + encodeURI($('#editLogonFName').val()) + "\",\"lastName\":\"" + encodeURI($('#editLogonLName').val()) + "\",\"email\":\"" + encodeURI($('#editLogonEmail').val()) + "\"}";
+//ajax to send the edits of an item to the server -------------------------------------------------------------------------------------------------------------------------
+function EditFeedback(feedbackId) {
+    var webMethod = "FeedbackListServices.asmx/ApproveFeedback";
+    var parameters = "{\"id\":\"" + encodeURI(feedbackId) + "\",\"approval\":\"" + "1" + "\"}";
 
     $.ajax({
         type: "POST",
@@ -370,47 +253,7 @@ function EditAccount() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            showPanel('accountsPanel');
-            LoadAccounts();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
-}
-
-
-
-// Functions for List below ----------------------------------------------------------------------------------------------------
-
-
-
-var currentItemId;
-var currentItemUpdates;
-
-// Saves selected item ID and outputs text content in txt input box.
-function currentItem(id) {
-    currentItemId = id;
-    var itemText = document.getElementById(id).textContent;
-    var inputText = document.getElementById("txt");
-    inputText.value = itemText;
-}
-
-//ajax to send the edits of an item to the server
-function EditListItem() {
-    currentItemUpdates = document.getElementById("txt").value;
-    var webMethod = "ListServices.asmx/UpdateList";
-    var parameters = "{\"id\":\"" + encodeURI(currentItemId) + "\",\"list\":\"" + encodeURI(currentItemUpdates) + "\"}";
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            showPanel('listPanel');
-            alert("Item successfully updated");
+            //showPanel('listPanel');
             LoadList();
         },
         error: function (e) {
@@ -419,48 +262,119 @@ function EditListItem() {
     });
 }
 
-//an ajax to delete a list
-function DeleteItem() {
-    var webMethod = "ListServices.asmx/DeleteListItem";
-    var parameters = "{\"id\":\"" + encodeURI(currentItemId) + "\"}";
-
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            showPanel('listPanel');
-            alert("Item successfully deleted from list");
-            LoadList();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
+// Print screen function -------------------------------------------------------------------------------------------------------------------------------------------
+function myFunction() {
+    window.print();
 }
 
+// Filter functions ------------------------------------------------------------------------------------------------------------------------------------------------
+var reviewerFilter;
+var departmentFilter;
+var ratingFilter;
+var approvalFilter;
 
+function hideReviewer() {
+    document.getElementById("hideReviewerCB").checked = true;
+    document.getElementById("unhideCB").checked = false;
+    reviewerFilter = 1;
+    LoadList()
+}
+function unhideReviewer() {
+    document.getElementById("hideReviewerCB").checked = false;
+    document.getElementById("unhideCB").checked = true;
+    reviewerFilter = 0;
+    LoadList()
+}
+function accountingFilter() {
+    document.getElementById("accountingCB").checked = true;
+    document.getElementById("iTCB").checked = false;
+    departmentFilter = "Accounting";
+    LoadList()
+}
+function ITFilter() {
+    document.getElementById("accountingCB").checked = false;
+    document.getElementById("iTCB").checked = true;
+    departmentFilter = "IT";
+    LoadList()
+}
+function rating1Filter() {
+    document.getElementById("1CB").checked = true;
+    document.getElementById("2CB").checked = false;
+    document.getElementById("3CB").checked = false;
+    document.getElementById("4CB").checked = false;
+    document.getElementById("5CB").checked = false;
+    ratingFilter = 1;
+    LoadList()
+}
+function rating2Filter() {
+    document.getElementById("1CB").checked = false;
+    document.getElementById("2CB").checked = true;
+    document.getElementById("3CB").checked = false;
+    document.getElementById("4CB").checked = false;
+    document.getElementById("5CB").checked = false;
+    ratingFilter = 2;
+    LoadList()
+}
+function rating3Filter() {
+    document.getElementById("1CB").checked = false;
+    document.getElementById("2CB").checked = false;
+    document.getElementById("3CB").checked = true;
+    document.getElementById("4CB").checked = false;
+    document.getElementById("5CB").checked = false;
+    ratingFilter = 3;
+    LoadList()
+}
+function rating4Filter() {
+    document.getElementById("1CB").checked = false;
+    document.getElementById("2CB").checked = false;
+    document.getElementById("3CB").checked = false;
+    document.getElementById("4CB").checked = true;
+    document.getElementById("5CB").checked = false;
+    ratingFilter = 4;
+    LoadList()
+}
+function approvedFilter() {
+    document.getElementById("approvedCB").checked = true;
+    document.getElementById("notApprovedCB").checked = false;
+    approvalFilter = 1;
+    LoadList()
+}
+function notApprovedFilter() {
+    document.getElementById("approvedCB").checked = false;
+    document.getElementById("notApprovedCB").checked = true;
+    approvalFilter = 0;
+    LoadList();
+}
+function filterReset() {
+    document.getElementById("1CB").checked = false;
+    document.getElementById("2CB").checked = false;
+    document.getElementById("3CB").checked = false;
+    document.getElementById("4CB").checked = false;
+    document.getElementById("hideReviewerCB").checked = true;
+    document.getElementById("unhideCB").checked = false;
+    document.getElementById("accountingCB").checked = false;
+    document.getElementById("iTCB").checked = false;
+    document.getElementById("approvedCB").checked = false;
+    document.getElementById("notApprovedCB").checked = true;
+    reviewerFilter = 1;
+    departmentFilter = "null";
+    ratingFilter = "null";
+    approvalFilter = 0;
+    LoadList();
+}
 
-//ajax to send the edits of an item to the server
-function CrossOut() {
-    var webMethod = "ListServices.asmx/UpdateCheckList";
-    var parameters = "{\"id\":\"" + encodeURI(crossOutItemId) + "\",\"checkId\":\"" + encodeURI(crossOutCheckedId) + "\"}";
+//Department page functions --------------------------------------------------------------------------------------
 
-    $.ajax({
-        type: "POST",
-        url: webMethod,
-        data: parameters,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            showPanel('listPanel');
-            alert("Item successfully updated");
-            LoadList();
-        },
-        error: function (e) {
-            alert("boo...");
-        }
-    });
+function ITQuestionsPage() {
+    showPanel('questionsPanel');
+}
+
+// Thank you page functions ---------------------------------------------------------------------------------------
+
+function BackToDepartments() {
+    showPanel('departmentsPanel');
+}
+
+function ToThankYouPage() {
+    showPanel('thankYouPanel');
 }
