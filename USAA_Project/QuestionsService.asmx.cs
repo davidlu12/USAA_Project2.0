@@ -63,7 +63,7 @@ namespace USAA_Project
             //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
             //does is tell mySql server to return the primary key of the last inserted row.
             string sqlSelect = "insert into feedbacklist (user, department, question, rating, comment, approval) " +
-                "values(@listvalue,@departmentvalue, @questionvalue, @ratingvalue, @commentvalue, 0);";
+                "values(@uservalue,@departmentvalue, @questionvalue, @ratingvalue, @commentvalue, 0);";
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
             MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
