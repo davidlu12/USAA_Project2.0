@@ -94,12 +94,12 @@ namespace USAA_Project
                 DataTable sqlDt = new DataTable("accounts");
 
                 string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
-                string sqlSelect = "select id, userid, pass, firstname, lastname, email from account where active=1 order by lastname";
+                string sqlSelect = "select id, userid, pass, firstname, lastname, email from account where active=1 and id = @loggedInUserIdValue";
 
                 MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
                 MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
-                //sqlCommand.Parameters.AddWithValue("@loggedInUserValue", HttpUtility.UrlDecode(Session["id"].ToString()));
+                sqlCommand.Parameters.AddWithValue("@loggedInUserIdValue", HttpUtility.UrlDecode(Session["id"].ToString()));
 
                 //gonna use this to fill a data table
                 MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
