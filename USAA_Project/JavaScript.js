@@ -22,6 +22,7 @@ function clearData() {
 
 //HERE'S AN EXAMPLE OF AN AJAX CALL WITH JQUERY!
 function LogOn(userId, pass) {
+    $(".menu").show();
     var webMethod = "AccountServices.asmx/LogOn";
     var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
 
@@ -52,6 +53,7 @@ function LogOn(userId, pass) {
 var accountsArray;
 //to begin with, we assume that the account is not an admin
 var admin = false;
+var loggedInUser;
 
 //this function grabs accounts and loads our account window
 function LoadAccounts() {
@@ -70,6 +72,7 @@ function LoadAccounts() {
                 //again, we assume we're not an admin unless we see data from the server
                 //that we know only admins can see
                 admin = false;
+                loggedInUser = accountsArray[0].firstName + accountsArray[0].lastName;
                 for (var i = 0; i < accountsArray.length; i++) {
                     //we grab on to a specific html element in jQuery
                     //by using a  # followed by that element's id.
@@ -105,6 +108,7 @@ function LoadAccounts() {
 function clearLogon() {
     $('#logonId').val("");
     $('#logonPassword').val("");
+    $(".menu").hide();
 }
 
 //logs the user off both at the client and at the server
@@ -137,6 +141,7 @@ function LogOff() {
 jQuery(function () {
     //when the app loads, show the logon panel to start with!
     showPanel('logonPanel');
+    clearLogon();
 });
 
 
@@ -170,6 +175,7 @@ function LoadList() {
                 $("#feedbackListItemBox").append("<thead><tr class='dbListTitle '>" +
                     "<th>Reviewer</th>" +
                     "<th>Department</th>" +
+                    "<th>Questions</th>" +
                     "<th>Rating</th>" +
                     "<th>Comment</th>" +
                     "<th>Approval</th>" +
@@ -181,19 +187,21 @@ function LoadList() {
                     var acct;
                     acct = "<tbody><tr>" + "<td>" + listsArray[i].reviewer + "</td>" +
                         "<td>" + listsArray[i].department + "</td>" +
+                        "<td>" + listsArray[i].question +"</td>"+
                         "<td>" + listsArray[i].rating + "</td>" +
-                        "<td>" + listsArray[i].comment + "</td>"
+                        "<td>" + listsArray[i].comment + "</td>";
 
                     var acctUserHidden;
                     acctUserHidden = "<tbody><tr>" + "<td> ****** </td>" +
                         "<td>" + listsArray[i].department + "</td>" +
+                        "<td>" + listsArray[i].question + "</td>"+
                         "<td>" + listsArray[i].rating + "</td>" +
-                        "<td>" + listsArray[i].comment + "</td>"
+                        "<td>" + listsArray[i].comment + "</td>";
 
                     var approvalChecked;
                     approvalChecked = "<td>" + "<button onclick='EditFeedback(" + listsArray[i].feedbackId + ")' disabled>Approved</button>" + "</td>" + "</tr></tbody>"
                     var approvalNotChecked;
-                    approvalNotChecked = "<td>" + "<button onclick='EditFeedback(" + listsArray[i].feedbackId + ")' >Click to Approve</button>" + "</td>" + "</tr></tbody>"
+                    approvalNotChecked = "<td>" + "<button id='approvedbutton' onclick='EditFeedback(" + listsArray[i].feedbackId + ")' >Click to Approve</button>" + "</td>" + "</tr></tbody>"
 
 
                     if (reviewerFilter === 1) {
@@ -364,9 +372,10 @@ function filterReset() {
 }
 
 //Department page functions --------------------------------------------------------------------------------------
-
+var departmentOfQuestion;
 function ITQuestionsPage() {
-    showPanel('questionsPanel');
+    showPanel('questionsPanel'); 
+    departmentOfQuestion = "IT";
 }
 
 // Thank you page functions ---------------------------------------------------------------------------------------
