@@ -62,14 +62,15 @@ namespace USAA_Project
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
             //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
             //does is tell mySql server to return the primary key of the last inserted row.
-            string sqlSelect = "insert into feedbacklist (user, department, rating, comment, approval) " +
-                "values(@listvalue,@departmentvalue, @ratingvalue, @commentvalue, 0);";
+            string sqlSelect = "insert into feedbacklist (user, department, question, rating, comment, approval) " +
+                "values(@listvalue,@departmentvalue, @questionvalue, @ratingvalue, @commentvalue, 0);";
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
             MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
             sqlCommand.Parameters.AddWithValue("@uservalue", HttpUtility.UrlDecode(name));
             sqlCommand.Parameters.AddWithValue("@departmentvalue", HttpUtility.UrlDecode(department));
+            sqlCommand.Parameters.AddWithValue("@questionvalue", HttpUtility.UrlDecode(question));
             sqlCommand.Parameters.AddWithValue("@ratingvalue", HttpUtility.UrlDecode(rating));
             sqlCommand.Parameters.AddWithValue("@commentvalue", HttpUtility.UrlDecode(comment));
             //this time, we're not using a data adapter to fill a data table.  We're just

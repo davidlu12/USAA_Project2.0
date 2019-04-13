@@ -20,7 +20,7 @@
         department = "IT"// dummy data
 
         var questionsArray;
-        var feedbackArray = [];// Feedback Array. FeedbackID, Feedback(response), approved?, QuestionID
+        var feedbackArray = [];// Feedback Array. user, department, question, inputType, approval
 
         function loadQuestions() {
             var webMethod = "../QuestionsService.asmx/GetQuestions";
@@ -41,31 +41,31 @@
 
                                 var ratingInput = document.createElement('input');
                                 var textboxInput = document.createElement('input');
-                                var saveButton = document.createElement('input');
+                                //var saveButton = document.createElement('input');
 
                                     $("#questionBox").append("<tr>"); // for rating
 
                                     for (var j = 0; j < 4; j++) {
                                         ratingInput = document.createElement('input');
                                         ratingInput.type = "radio";
-                                        ratingInput.id = questionsArray[i].QuestionID;
+                                        ratingInput.id = j + questionsArray[i].Question;
                                         ratingInput.class = "answer";
-                                        ratingInput.name = "test";
+                                        ratingInput.name = "test"+i;
                                         ratingInput.value = j+1;
                                         $("#questionBox").append("<tr>" + "<td>", ratingInput, ratingInput.value, "</td>" + "</tr>");
-                                        feedbackArray.push([ratingInput, false, ratingInput.id]);
+                                        feedbackArray.push([questionsArray[i].Question, ratingInput]);
                                     }
                                     $("#questionBox").append("</tr>");
 
                                     textboxInput.type = "text"; // for textbox
-                                    textboxInput.id = questionsArray[i].QuestionID;
+                                    textboxInput.id = i;
                                     textboxInput.class = "answer";
-                                    $("#questionBox").append("<tr>" + "<td>", textboxInput, "</td>" + "</tr>");
-                                    feedbackArray.push([textboxInput, false, textboxInput.id]);
+                                $("#questionBox").append("<tr>" + "<td>", textboxInput, "</td>" + "</tr>");
+                                feedbackArray.push([questionsArray[i].Question, textboxInput]);
 
-                                saveButton.type = "Button"; // for save button
-                                saveButton.value = "Save";
-                                $("#questionBox").append("<tr>" + "<td", saveButton, "</td>" + "</tr>");
+                                //saveButton.type = "Button"; // for save button
+                                //saveButton.value = "Save";
+                                //$("#questionBox").append("<tr>" + "<td", saveButton, "</td>" + "</tr>");
                             }
                         }
                     }
@@ -77,12 +77,13 @@
             });
         }
 
-        function submitFeedback(name, department, rating, comment) {
-            /*var webmethod = "../QuestionsService.asmx/AddResponseToList";
-            var parameters = "{\"name\":\"" + encodeURI(name) + "\"}";
+        function submitFeedback() {
+            //var webmethod = "../QuestionsService.asmx/AddResponseToList";
+            //var parameters = "{\"name\":\"" + encodeURI(name) + "\"department\":\"" + encodeURI(department) + "\"question\":\"" + encodeURI(question) + "\"rating\":\"" + encodeURI(rating) +
+             //   "\"comment\":\"" + encodeURI(comment) + "\"}";
 
 
-            $.ajax({
+            /*$.ajax({
                 type: "POST",
                 url: webMethod,
                 data: parameters,
@@ -90,27 +91,27 @@
                 dataType: "json",
                 success: function (msg) {
                     alert("Item successfully added");
-                    LoadList();
+                    //LoadList();
                 },
                 error: function (e) {
                     alert("boo...");
                 }
             });*/
 
+            var feedbackListArray = []
+            var currentQuestion, radioValue, textValue;
 
-            // input.id = question id
             for (var i = 0; i < feedbackArray.length; i++) {
-                userFeedbackInput = feedbackArray[i][0];
-                if (userFeedbackInput.type == 'radio' && userFeedbackInput.checked) {
-                    console.log(userFeedbackInput.value);
+                currentQuestion = feedbackArray[i][0];
+                if (feedbackArray[i][1].type == 'radio' && feedbackArray[i][1].checked == true) {
+                    radioValue = feedbackArray[i][1].value;
                 }
-                else if (userFeedbackInput.type == 'text') {
-                    console.log(userFeedbackInput.value);
+                else if (feedbackArray[i][1].type == 'text') {
+                    textValue = feedbackArray[i][1].value;
+                    feedbackListArray.push(["", name, department, currentQuestion, radioValue, textValue]);
                 }
-
-                //console.log(feedbackArray[i][0].value);
             }
-            
+            console.log(feedbackListArray);
         }
 
     </script>
@@ -118,10 +119,7 @@
 <body onload="loadQuestions()">
     <table class="center, questionBox" id="questionBox">
         <tr>
-            <!--<th>QuestionID</th>-->
             <th>Question</th>
-            <!--<th>QuestionType</th>
-    <th>DepartmentName</th>-->
         </tr>
     </table>
     <input type="submit" id="submitButton" onclick="submitFeedback()"/>
