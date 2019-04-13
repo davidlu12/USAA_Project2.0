@@ -9,96 +9,92 @@
 	background-color: #1A3258;
 }
 
-/*.left {
-	text-align: left;
-}
-
-.center {
-	text-align: center;
-}*/
-
 .menu {
-    flex: 1;
-    text-align: right;
-    color: white;
+	flex: 1;
+	text-align: right;
+	color: white;
 }
 
-.menu a {
-    font-size: small;
-    color: white;
-}
+	.menu a {
+		font-size: small;
+		color: white;
+	}
 
 .contentContainer {
-    flex: 1;
-    position: relative;
-    margin: 0px;
+	flex: 1;
+	position: relative;
+	margin: 0px;
 }
 
 .contentPanel {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    visibility: hidden;
-    flex: 1;
-
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	visibility: hidden;
+	flex: 1;
 }
 
 .logonPanel {
-    text-align: center;
-    align-content: center;
+	text-align: center;
+	align-content: center;
 }
 
-#logonPanel button {
-	background-color: #1A3258;
-	color: white;
-	border: 2px solid white;
-	border-radius: 5px;
-	font-weight: bold;
-}
-
-	#logonPanel button:hover {
-		background-color: white;
-		color: #1A3258;
-		border: 2px solid #1A3258;
+	.logonPanel button, button {
+		background-color: #1A3258;
+		color: white;
+		border: 2px solid white;
+		border-radius: 5px;
+		font-weight: bold;
 	}
+
+		.logonPanel button:hover, button:hover {
+			background-color: #0F1E34;
+			color: white;
+			border: 2px solid #32cdf7;
+			box-shadow: 1px 1px 5px 5px #32cdf7;
+		}
+
+#thankYouPanel button {
+	padding: 15px;
+}
 
 #logonPanel h1 {
 	color: white;
 }
 
 .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: auto;
 }
 
-    .form-signin .checkbox {
-        font-weight: 400;
-    }
+	.form-signin .checkbox {
+		font-weight: 400;
+	}
 
-    .form-signin .form-control {
-        position: relative;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        height: auto;
-        padding: 10px;
-        font-size: 16px;
-    }
+	.form-signin .form-control {
+		position: relative;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		height: auto;
+		padding: 10px;
+		font-size: 16px;
+	}
 
-        .form-signin .form-control:focus {
-            z-index:5;
-        }
+		.form-signin .form-control:focus {
+			z-index: 5;
+		}
 
 	.form-signin input[type="text"] {
 		margin-bottom: 10px;
 	}
 
-    .form-signin input[type="password"] {
-        margin-bottom: 10px;
-    }
+	.form-signin input[type="password"] {
+		margin-bottom: 10px;
+	}
 
 #departmentsPanel .row {
 	width: 100%;
@@ -114,8 +110,8 @@
 	color: white;
 }
 
-#departmentsPanel button, option {
-	background-color: white;
+#departmentsPanel button, #departmentsPanel option {
+	background-color: rgb(217, 220, 222);
 	color: #1A3258;
 }
 
@@ -133,7 +129,6 @@
 
 .filteredOptionsTable {
 	background-color: #1A3258;
-
 }
 
 #feedbackListPanel .card-header {
@@ -142,12 +137,11 @@
 
 #feedbackListPanel .filter-content {
 	background-color: white;
-	
 }
 
 .dbListTitle {
-    overflow: hidden;
-    background-color: white;
+	overflow: hidden;
+	background-color: white;
 }
 
 #feedbackListPanel th {
@@ -158,18 +152,25 @@
 	color: white;
 }
 
-#feedbackListPanel button {
-	background-color: #1A3258;
-	color: white;
-	border: 2px solid white;
+/*#feedbackListPanel button, #questionsPanel button, #thankYouPanel button{
+	background-color: white;
+	color: #1A3258;
+	border: 2px solid #1A3258;
 	border-radius: 5px;
 	font-weight: bold;
 }
 
-	#feedbackListPanel button:hover {
-		background-color: white;
-		color: #1A3258;
-		border: 2px solid #1A3258;
+	#feedbackListPanel button:hover, #questionsPanel button:hover {
+		background-color: #182F53;
+		color: white;
+		border: 2px solid #396DC1;
+	}*/
+
+#thankYouPanel {
+	text-align: center;
+}
+
+	#thankYouPanel h1 {
+		margin: 15% 0px 10% 0px;
+		color: white;
 	}
-
-

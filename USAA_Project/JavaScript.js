@@ -89,7 +89,7 @@ function LoadAccounts() {
                             "</a></div><hr>"*/
                         showPanel('departmentsPanel');
                         LoadList();
-                        LoadStores();
+                      
                     }
 
                 }
