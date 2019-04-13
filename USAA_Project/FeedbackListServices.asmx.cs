@@ -77,6 +77,7 @@ namespace USAA_Project
                 {
                     reviewer = sqlDt.Rows[i]["user"].ToString(),
                     department = sqlDt.Rows[i]["department"].ToString(),
+                    question = sqlDt.Rows[i]["question"].ToString(),
                     rating = Convert.ToInt32(sqlDt.Rows[i]["rating"]),
                     comment = sqlDt.Rows[i]["comment"].ToString(),
                     approval = Convert.ToInt32(sqlDt.Rows[i]["approval"]),

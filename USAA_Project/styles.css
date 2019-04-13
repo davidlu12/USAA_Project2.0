@@ -116,7 +116,6 @@
 }
 
 #feedbackListPanel table {
-	width: 70%;
 	margin-right: 5%;
 	margin: auto;
 	text-align: center;
@@ -124,11 +123,21 @@
 }
 
 #feedbackListPanel {
-	background-color: white;
+    background-color: #1A3258;
+    width: 100%;
 }
 
 .filteredOptionsTable {
 	background-color: #1A3258;
+    float:left;
+    width: 20%;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.dbListTable {
+    float: none;
+    width: 80%;
+    margin: 0;
 }
 
 #feedbackListPanel .card-header {
@@ -140,8 +149,18 @@
 }
 
 .dbListTitle {
-	overflow: hidden;
-	background-color: white;
+    overflow: hidden;
+    background-color: #1A3258;
+    border-width: 1px;
+}
+
+#feedbackListPanel tbody{
+    background-color:white;
+}
+
+#feedbackListPanel #approvedbutton {
+    color: #1A3258;
+    background-color: transparent;
 }
 
 #feedbackListPanel th {
@@ -166,8 +185,9 @@
 		border: 2px solid #396DC1;
 	}*/
 
+
 #thankYouPanel {
-	text-align: center;
+    text-align: center;
 }
 
 	#thankYouPanel h1 {
