@@ -77,26 +77,13 @@
             });
         }
 
-        function submitFeedback() {
-            //var webmethod = "../QuestionsService.asmx/AddResponseToList";
-            //var parameters = "{\"name\":\"" + encodeURI(name) + "\"department\":\"" + encodeURI(department) + "\"question\":\"" + encodeURI(question) + "\"rating\":\"" + encodeURI(rating) +
-             //   "\"comment\":\"" + encodeURI(comment) + "\"}";
+        var questionDB;
+        var radioValueDB;
+        var commentDb;
+        var userName;
+        var department;
 
-
-            /*$.ajax({
-                type: "POST",
-                url: webMethod,
-                data: parameters,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    alert("Item successfully added");
-                    //LoadList();
-                },
-                error: function (e) {
-                    alert("boo...");
-                }
-            });*/
+        function storeFeedback() {          
 
             var feedbackListArray = []
             var currentQuestion, radioValue, textValue;
@@ -112,7 +99,40 @@
                 }
             }
             console.log(feedbackListArray);
+
+            for (var i = 0; i < feedbackListArray.length; i++) {
+                questionDB = feedbackListArray[i][3];
+                radioValueDB = feedbackListArray[i][4];
+                commentDb = feedbackListArray[i][5];
+                userName = feedbackListArray[i][1];
+                department = feedbackListArray[i][2];
+                console.log(questionDB);
+                console.log(radioValueDB);
+                console.log(commentDb);
+                console.log(department);
+                submitFeedbackToDb(userName,department,questionDB, radioValueDB, commentDb);
+            }
         }
+
+        function submitFeedbackToDb(userName,department,questionDB, radioValueDB, commentDb) {
+            var webMethod = "../QuestionsService.asmx/AddResponseToList";
+            var parameters = "{\"name\":\"" + encodeURI(userName) + "\",\"department\":\"" + encodeURI(department) + "\",\"question\":\"" + encodeURI(questionDB) + "\",\"rating\":\"" + encodeURI(radioValueDB) +
+                "\",\"comment\":\"" + encodeURI(commentDb) + "\"}";
+
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                },
+                error: function (e) {
+                    alert("boo...");
+                }
+            });
+        };
 
     </script>
 </head>
@@ -122,6 +142,6 @@
             <th>Question</th>
         </tr>
     </table>
-    <input type="submit" id="submitButton" onclick="submitFeedback()"/>
+    <input type="submit" id="submitButton" onclick="storeFeedback()"/>
 </body>
 </html>

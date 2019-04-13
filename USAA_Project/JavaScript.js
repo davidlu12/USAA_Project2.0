@@ -375,6 +375,7 @@ function filterReset() {
 var departmentOfQuestion;
 function ITQuestionsPage() {
     showPanel('questionsPanel'); 
+    loadQuestions();
     departmentOfQuestion = "IT";
 }
 
@@ -387,3 +388,124 @@ function BackToDepartments() {
 function ToThankYouPage() {
     showPanel('thankYouPanel');
 }
+
+// Questions Page ------------------------------------------------------------------------------------------------
+var name = "Hailee Copter";
+var department;
+department = "IT"// dummy data
+
+var questionsArray;
+var feedbackArray = [];// Feedback Array. user, department, question, inputType, approval
+
+function loadQuestions() {
+    var webMethod = "../QuestionsService.asmx/GetQuestions";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            if (msg.d.length > 0) {
+                questionsArray = msg.d;
+
+                for (var i = 0; i < questionsArray.length; i++) {
+                    if (questionsArray[i].DepartmentName === department) {
+                        $("#questionBox").append("<tr>" +
+                            "<td>" + questionsArray[i].Question + "</td>" +
+                            "</tr>");
+
+                        var ratingInput = document.createElement('input');
+                        var textboxInput = document.createElement('input');
+                        //var saveButton = document.createElement('input');
+
+                        $("#questionBox").append("<tr>"); // for rating
+
+                        for (var j = 0; j < 4; j++) {
+                            ratingInput = document.createElement('input');
+                            ratingInput.type = "radio";
+                            ratingInput.id = j + questionsArray[i].Question;
+                            ratingInput.class = "answer";
+                            ratingInput.name = "test" + i;
+                            ratingInput.value = j + 1;
+                            $("#questionBox").append("<tr>" + "<td>", ratingInput, ratingInput.value, "</td>" + "</tr>");
+                            feedbackArray.push([questionsArray[i].Question, ratingInput]);
+                        }
+                        $("#questionBox").append("</tr>");
+
+                        textboxInput.type = "text"; // for textbox
+                        textboxInput.id = i;
+                        textboxInput.class = "answer";
+                        $("#questionBox").append("<tr>" + "<td>", textboxInput, "</td>" + "</tr>");
+                        feedbackArray.push([questionsArray[i].Question, textboxInput]);
+
+                        //saveButton.type = "Button"; // for save button
+                        //saveButton.value = "Save";
+                        //$("#questionBox").append("<tr>" + "<td", saveButton, "</td>" + "</tr>");
+                    }
+                }
+            }
+            accountWindowShowing = true;
+        },
+        error: function (e) {
+            alert("boo...");
+        }
+    });
+}
+
+var questionDB;
+var radioValueDB;
+var commentDb;
+var userName;
+var departmentDB;
+
+function storeFeedback() {
+
+    var feedbackListArray = [];
+    var currentQuestion, radioValue, textValue;
+
+    for (var i = 0; i < feedbackArray.length; i++) {
+        currentQuestion = feedbackArray[i][0];
+        if (feedbackArray[i][1].type === 'radio' && feedbackArray[i][1].checked === true) {
+            radioValue = feedbackArray[i][1].value;
+        }
+        else if (feedbackArray[i][1].type === 'text') {
+            textValue = feedbackArray[i][1].value;
+            feedbackListArray.push(["", name, department, currentQuestion, radioValue, textValue]);
+        }
+    }
+    console.log(feedbackListArray);
+
+    for (var k = 0; k < feedbackListArray.length; k++) {
+        questionDB = feedbackListArray[k][3];
+        radioValueDB = feedbackListArray[k][4];
+        commentDb = feedbackListArray[k][5];
+        userName = feedbackListArray[k][1];
+        departmentDB = feedbackListArray[k][2];
+        console.log(questionDB);
+        console.log(radioValueDB);
+        console.log(commentDb);
+        console.log(departmentDB);
+        submitFeedbackToDb(userName, departmentDB, questionDB, radioValueDB, commentDb);
+    }
+    ToThankYouPage()
+}
+
+function submitFeedbackToDb(userName, department, questionDB, radioValueDB, commentDb) {
+    var webMethod = "../QuestionsService.asmx/AddResponseToList";
+    var parameters = "{\"name\":\"" + encodeURI(userName) + "\",\"department\":\"" + encodeURI(department) + "\",\"question\":\"" + encodeURI(questionDB) + "\",\"rating\":\"" + encodeURI(radioValueDB) +
+        "\",\"comment\":\"" + encodeURI(commentDb) + "\"}";
+
+
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        data: parameters,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+        },
+        error: function (e) {
+            alert("boo...");
+        }
+    });
+};
