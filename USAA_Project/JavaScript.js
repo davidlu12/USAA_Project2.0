@@ -22,7 +22,6 @@ function clearData() {
 
 //HERE'S AN EXAMPLE OF AN AJAX CALL WITH JQUERY!
 function LogOn(userId, pass) {
-    $(".menu").show();
     var webMethod = "AccountServices.asmx/LogOn";
     var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
 
@@ -38,6 +37,7 @@ function LogOn(userId, pass) {
                 //server replied true, so show the departments panel
                 //showPanel("departmentsPanel");
                 LoadAccounts();
+                $(".menu").show();
             }
             else {
                 alert("Login Fail");
@@ -72,16 +72,17 @@ function LoadAccounts() {
                 //again, we assume we're not an admin unless we see data from the server
                 //that we know only admins can see
                 admin = false;
-                loggedInUser = accountsArray[0].firstName + accountsArray[0].lastName;
+                //loggedInUser = accountsArray[0].firstName + accountsArray[0].lastName;
                 for (var i = 0; i < accountsArray.length; i++) {
                     //we grab on to a specific html element in jQuery
                     //by using a  # followed by that element's id.
-                    var acct;
+                    //var acct;
                     //if they have access to admin-level info (like userid and password) then
                     //create output that has an edit option
                     if (accountsArray[i].userId !== null) {
                         admin = true;
                         showPanel('feedbackListPanel');
+                        alert("logged in");
                         filterReset();
                     }
                     //if not, then they're not an admin so don't include the edit option
