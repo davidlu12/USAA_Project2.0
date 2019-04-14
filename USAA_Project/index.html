@@ -177,13 +177,23 @@
         </div>
 
         <div id="questionsPanel" class="contentPanel">
-            <table class="center, questionBox" id="questionBox">
-                <tr>
-                    <th>Question</th>
-                </tr>
-            </table>
-            <button id="submitButton" onclick="storeFeedback()">Submit Feedback</button>
+			
+				<div class="row">
+					<div class="col-3"></div>
+					<div class="col-6">
+						<table class="questionBox" id="questionBox">
+							<tr>
+								<th>Question</th>
+							</tr>
+						</table>
 
+						<div id="submit">
+							<button id="submitButton" onclick="storeFeedback()">Submit Feedback</button>
+						</div>
+					</div>
+					<div class="col-3"></div>
+				</div>
+			
         </div>
 
         <div id="thankYouPanel" class="contentPanel">
