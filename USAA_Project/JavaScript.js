@@ -22,7 +22,6 @@ function clearData() {
 
 //HERE'S AN EXAMPLE OF AN AJAX CALL WITH JQUERY!
 function LogOn(userId, pass) {
-    $(".menu").show();
     var webMethod = "AccountServices.asmx/LogOn";
     var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
 
@@ -38,6 +37,7 @@ function LogOn(userId, pass) {
                 //server replied true, so show the departments panel
                 //showPanel("departmentsPanel");
                 LoadAccounts();
+                $(".menu").show();
             }
             else {
                 alert("Login Fail");
@@ -72,11 +72,11 @@ function LoadAccounts() {
                 //again, we assume we're not an admin unless we see data from the server
                 //that we know only admins can see
                 admin = false;
-                loggedInUser = accountsArray[0].firstName + accountsArray[0].lastName;
+                loggedInUser = accountsArray[0].firstName +" "+ accountsArray[0].lastName;
                 for (var i = 0; i < accountsArray.length; i++) {
                     //we grab on to a specific html element in jQuery
                     //by using a  # followed by that element's id.
-                    var acct;
+                    //var acct;
                     //if they have access to admin-level info (like userid and password) then
                     //create output that has an edit option
                     if (accountsArray[i].userId !== null) {
@@ -285,67 +285,63 @@ function hideReviewer() {
     document.getElementById("hideReviewerCB").checked = true;
     document.getElementById("unhideCB").checked = false;
     reviewerFilter = 1;
-    LoadList()
+    LoadList();
 }
 function unhideReviewer() {
     document.getElementById("hideReviewerCB").checked = false;
     document.getElementById("unhideCB").checked = true;
     reviewerFilter = 0;
-    LoadList()
+    LoadList();
 }
 function accountingFilter() {
     document.getElementById("accountingCB").checked = true;
     document.getElementById("iTCB").checked = false;
     departmentFilter = "Accounting";
-    LoadList()
+    LoadList();
 }
 function ITFilter() {
     document.getElementById("accountingCB").checked = false;
     document.getElementById("iTCB").checked = true;
     departmentFilter = "IT";
-    LoadList()
+    LoadList();
 }
 function rating1Filter() {
     document.getElementById("1CB").checked = true;
     document.getElementById("2CB").checked = false;
     document.getElementById("3CB").checked = false;
     document.getElementById("4CB").checked = false;
-    document.getElementById("5CB").checked = false;
     ratingFilter = 1;
-    LoadList()
+    LoadList();
 }
 function rating2Filter() {
     document.getElementById("1CB").checked = false;
     document.getElementById("2CB").checked = true;
     document.getElementById("3CB").checked = false;
     document.getElementById("4CB").checked = false;
-    document.getElementById("5CB").checked = false;
     ratingFilter = 2;
-    LoadList()
+    LoadList();
 }
 function rating3Filter() {
     document.getElementById("1CB").checked = false;
     document.getElementById("2CB").checked = false;
     document.getElementById("3CB").checked = true;
     document.getElementById("4CB").checked = false;
-    document.getElementById("5CB").checked = false;
     ratingFilter = 3;
-    LoadList()
+    LoadList();
 }
 function rating4Filter() {
     document.getElementById("1CB").checked = false;
     document.getElementById("2CB").checked = false;
     document.getElementById("3CB").checked = false;
     document.getElementById("4CB").checked = true;
-    document.getElementById("5CB").checked = false;
     ratingFilter = 4;
-    LoadList()
+    LoadList();
 }
 function approvedFilter() {
     document.getElementById("approvedCB").checked = true;
     document.getElementById("notApprovedCB").checked = false;
     approvalFilter = 1;
-    LoadList()
+    LoadList();
 }
 function notApprovedFilter() {
     document.getElementById("approvedCB").checked = false;
@@ -372,11 +368,11 @@ function filterReset() {
 }
 
 //Department page functions --------------------------------------------------------------------------------------
-var departmentOfQuestion;
+var department;
 function ITQuestionsPage() {
     showPanel('questionsPanel'); 
     loadQuestions();
-    departmentOfQuestion = "IT";
+    department = "IT";
 }
 
 // Thank you page functions ---------------------------------------------------------------------------------------
@@ -391,8 +387,6 @@ function ToThankYouPage() {
 
 // Questions Page ------------------------------------------------------------------------------------------------
 var name = "Hailee Copter";
-var department;
-department = "IT"// dummy data
 
 var questionsArray;
 var feedbackArray = [];// Feedback Array. user, department, question, inputType, approval
@@ -479,7 +473,7 @@ function storeFeedback() {
         questionDB = feedbackListArray[k][3];
         radioValueDB = feedbackListArray[k][4];
         commentDb = feedbackListArray[k][5];
-        userName = feedbackListArray[k][1];
+        userName = loggedInUser;
         departmentDB = feedbackListArray[k][2];
         console.log(questionDB);
         console.log(radioValueDB);
@@ -487,7 +481,7 @@ function storeFeedback() {
         console.log(departmentDB);
         submitFeedbackToDb(userName, departmentDB, questionDB, radioValueDB, commentDb);
     }
-    ToThankYouPage()
+    ToThankYouPage();
 }
 
 function submitFeedbackToDb(userName, department, questionDB, radioValueDB, commentDb) {

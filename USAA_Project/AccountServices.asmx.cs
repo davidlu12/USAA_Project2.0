@@ -22,7 +22,6 @@ namespace USAA_Project
     [System.Web.Script.Services.ScriptService]
     public class AccountServices : WebService
     {
-        string loggedInUser;
         //EXAMPLE OF A SIMPLE SELECT QUERY (PARAMETERS PASSED IN FROM CLIENT)
         [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
         public bool LogOn(string uid, string pass)
@@ -62,7 +61,6 @@ namespace USAA_Project
                 //so we can check those values later on other method calls to see if they 
                 //are 1) logged in at all, and 2) and admin or not
                 Session["id"] = sqlDt.Rows[0]["id"];
-                loggedInUser = sqlDt.Rows[0]["id"].ToString();
                 Session["admin"] = sqlDt.Rows[0]["admin"];
                 success = true;
             }
@@ -96,12 +94,12 @@ namespace USAA_Project
                 DataTable sqlDt = new DataTable("accounts");
 
                 string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
-                string sqlSelect = "select id, userid, pass, firstname, lastname, email from account where  userId =@loggedInUserValue order by lastname";
+                string sqlSelect = "select id, userid, pass, firstname, lastname, email from account where active=1 and id = @loggedInUserIdValue";
 
                 MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
                 MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
-                sqlCommand.Parameters.AddWithValue("@loggedInUserValue", HttpUtility.UrlDecode(loggedInUser));
+                sqlCommand.Parameters.AddWithValue("@loggedInUserIdValue", HttpUtility.UrlDecode(Session["id"].ToString()));
 
                 //gonna use this to fill a data table
                 MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
