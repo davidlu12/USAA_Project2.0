@@ -158,10 +158,26 @@
     background-color:white;
 }
 
-#feedbackListPanel #approvedbutton {
-    color: #1A3258;
-    background-color: transparent;
+#feedbackListPanel #approvedbutton1, #feedbackListPanel #approvedbutton2{
+	color: #1A3258;
+	border: 1px;
+	border-color: white;
+	background-color: transparent;
 }
+
+	#feedbackListPanel #approvedbutton1:hover {
+		text-decoration: underline;
+		border: 1px;
+		border-color: white;
+		box-shadow: none;
+	}
+
+	#feedbackListPanel #approvedbutton2:hover {
+		border: 1px;
+		border-color: white;
+		box-shadow: none;
+	}
+
 
 #feedbackListPanel th {
 	padding: .75rem 1.25rem;
