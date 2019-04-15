@@ -199,9 +199,9 @@ function LoadList() {
                         "<td>" + listsArray[i].comment + "</td>";
 
                     var approvalChecked;
-                    approvalChecked = "<td>" + "<button onclick='EditFeedback(" + listsArray[i].feedbackId + ")' disabled>Approved</button>" + "</td>" + "</tr></tbody>"
+                    approvalChecked = "<td>" + "<button id='approvedbutton2' onclick='EditFeedback(" + listsArray[i].feedbackId + ")' disabled>Approved</button>" + "</td>" + "</tr></tbody>"
                     var approvalNotChecked;
-                    approvalNotChecked = "<td>" + "<button id='approvedbutton' onclick='EditFeedback(" + listsArray[i].feedbackId + ")' >Click to Approve</button>" + "</td>" + "</tr></tbody>"
+                    approvalNotChecked = "<td>" + "<button id='approvedbutton1' onclick='EditFeedback(" + listsArray[i].feedbackId + ")' >Click to Approve</button>" + "</td>" + "</tr></tbody>"
 
 
                     if (reviewerFilter === 1) {

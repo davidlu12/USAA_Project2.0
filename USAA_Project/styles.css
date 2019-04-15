@@ -98,12 +98,13 @@
 
 #departmentsPanel .row {
 	width: 100%;
-	padding: 15px;
+	padding: 10px;
 	margin: auto;
 }
 
 #departmentsPanel .col {
 	height: 90px;
+	margin:15px;
 }
 
 #departmentsPanel h1, #departmentsPanel h3 {
@@ -158,10 +159,26 @@
     background-color:white;
 }
 
-#feedbackListPanel #approvedbutton {
-    color: #1A3258;
-    background-color: transparent;
+#feedbackListPanel #approvedbutton1, #feedbackListPanel #approvedbutton2{
+	color: #1A3258;
+	border: 1px;
+	border-color: white;
+	background-color: transparent;
 }
+
+	#feedbackListPanel #approvedbutton1:hover {
+		text-decoration: underline;
+		border: 1px;
+		border-color: white;
+		box-shadow: none;
+	}
+
+	#feedbackListPanel #approvedbutton2:hover {
+		border: 1px;
+		border-color: white;
+		box-shadow: none;
+	}
+
 
 #feedbackListPanel th {
 	padding: .75rem 1.25rem;
@@ -185,9 +202,46 @@
 		border: 2px solid #396DC1;
 	}*/
 
+.questionBox{
+	color:white;
+	width: 100%;
+}
+
+	.questionBox th {
+		padding: .75rem 0rem;
+		margin-bottom: 0;
+		border-bottom: 1px solid rgba(0,0,0,.125);
+		color: white;
+		font-size:x-large;
+	}
+
+	.questionBox tr {
+		padding: .75rem 1.25rem;
+	}
+
+#questionsPanel #submit {
+	text-align: center;
+	margin:20px;
+}
+
+#questionsPanel #submitButton {
+	padding: 15px;
+}
+
+.questionBox input[type="text"] {
+	padding: 5px 10px 5px 10px;
+	border-radius: 5px;
+	margin-bottom:20px;
+	width: 100%;
+}
+
+/*.questionBox tr:empty {
+	display: none;
+	border-style: none;
+}*/
 
 #thankYouPanel {
-    text-align: center;
+	text-align: center;
 }
 
 	#thankYouPanel h1 {
