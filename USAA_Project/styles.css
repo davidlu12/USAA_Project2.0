@@ -16,7 +16,7 @@
 }
 
 	.menu a {
-		font-size: small;
+		font-size: medium;
 		color: white;
 	}
 
@@ -55,10 +55,6 @@
 			border: 2px solid #32cdf7;
 			box-shadow: 1px 1px 5px 5px #32cdf7;
 		}
-
-#thankYouPanel button {
-	padding: 15px;
-}
 
 #logonPanel h1 {
 	color: white;
@@ -103,17 +99,19 @@
 }
 
 #departmentsPanel .col {
-	height: 90px;
+	height: 100px;
 	margin:15px;
 }
 
-#departmentsPanel h1, #departmentsPanel h3 {
+#departmentsPanel h1, #departmentsPanel h2 {
 	color: white;
 }
 
 #departmentsPanel button, #departmentsPanel option {
 	background-color: rgb(217, 220, 222);
 	color: #1A3258;
+	font-size:22px;
+	padding: 10px;
 }
 
 #feedbackListPanel table {
@@ -126,6 +124,7 @@
 #feedbackListPanel {
     background-color: #1A3258;
     width: 100%;
+	font-size:larger;
 }
 
 .filteredOptionsTable {
@@ -186,7 +185,9 @@
 	background-color: #1A3258;
 	border-bottom: 1px solid rgba(0,0,0,.125);
 	color: white;
+	font-size:x-large;
 }
+
 
 /*#feedbackListPanel button, #questionsPanel button, #thankYouPanel button{
 	background-color: white;
@@ -205,6 +206,7 @@
 .questionBox{
 	color:white;
 	width: 100%;
+	font-size:x-large;
 }
 
 	.questionBox th {
@@ -212,26 +214,32 @@
 		margin-bottom: 0;
 		border-bottom: 1px solid rgba(0,0,0,.125);
 		color: white;
-		font-size:x-large;
+		font-size:xx-large;
 	}
 
 	.questionBox tr {
 		padding: .75rem 1.25rem;
 	}
 
-#questionsPanel #submit {
+#questionsPanel #submit{
 	text-align: center;
 	margin:20px;
 }
 
 #questionsPanel #submitButton {
 	padding: 15px;
+	font-size:x-large;
+}
+
+.filteredOptionsTable button {
+	margin: 20px 0px 10px 0px;
+	padding: 10px;
 }
 
 .questionBox input[type="text"] {
 	padding: 5px 10px 5px 10px;
 	border-radius: 5px;
-	margin-bottom:20px;
+	margin-bottom: 40px;
 	width: 100%;
 }
 
@@ -244,7 +252,14 @@
 	text-align: center;
 }
 
-	#thankYouPanel h1 {
+	#thankYouPanel #thanks {
 		margin: 15% 0px 10% 0px;
 		color: white;
+		font-size:50px;
+		
+	}
+
+	#thankYouPanel button {
+		padding: 15px;
+		font-size: x-large;
 	}
