@@ -39,7 +39,7 @@
 .logonPanel {
 	text-align: center;
 	align-content: center;
-	margin-top:14%;
+	/*margin-top:14%;*/
 }
 
 	.logonPanel button, button {
@@ -57,8 +57,9 @@
 			box-shadow: 1px 1px 5px 5px #32cdf7;
 		}
 
-#logonPanel h1 {
+#logonPanel h3 {
 	color: white;
+	font-style: italic;
 }
 
 .form-signin {
@@ -264,3 +265,9 @@
 		padding: 15px;
 		font-size: x-large;
 	}
+
+#logonPanel #welcome {
+	margin: 30% 0% 20% 0%;
+	font-size: 50px;
+	color: white;
+}
