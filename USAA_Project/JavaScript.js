@@ -401,7 +401,7 @@ function loadQuestions() {
         success: function (msg) {
             if (msg.d.length > 0) {
                 questionsArray = msg.d;
-
+                $("#questionBox").empty();
                 for (var i = 0; i < questionsArray.length; i++) {
                     if (questionsArray[i].DepartmentName === department) {
                         $("#questionBox").append("<tr>" +
@@ -481,6 +481,7 @@ function storeFeedback() {
         console.log(departmentDB);
         submitFeedbackToDb(userName, departmentDB, questionDB, radioValueDB, commentDb);
     }
+
     ToThankYouPage();
 }
 
