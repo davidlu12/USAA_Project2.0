@@ -22,6 +22,7 @@ function clearData() {
 
 //HERE'S AN EXAMPLE OF AN AJAX CALL WITH JQUERY!
 function LogOn(userId, pass) {
+    window.scrollTo(0, 0);
     var webMethod = "AccountServices.asmx/LogOn";
     var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
 
@@ -57,6 +58,7 @@ var loggedInUser;
 
 //this function grabs accounts and loads our account window
 function LoadAccounts() {
+    window.scrollTo(0, 0);
     var webMethod = "AccountServices.asmx/GetAccounts";
     $.ajax({
         type: "POST",
@@ -155,6 +157,7 @@ var listsArray;
 
 //this function grabs lists and loads our list window
 function LoadList() {
+    window.scrollTo(0, 0);
     var webMethod = "FeedbackListServices.asmx/GetList";
     var parameters = "{\"departmentFilter\":\"" + encodeURI(departmentFilter) + "\",\"ratingFilter\":\"" + encodeURI(ratingFilter) + "\",\"approvalFilter\":\"" + encodeURI(approvalFilter) + "\"}";
     $.ajax({
@@ -371,6 +374,7 @@ function filterReset() {
 var department;
 function ITQuestionsPage() {
     showPanel('questionsPanel'); 
+    window.scrollTo(0, 0);
     loadQuestions();
     department = "IT";
 }
@@ -383,6 +387,7 @@ function BackToDepartments() {
 
 function ToThankYouPage() {
     showPanel('thankYouPanel');
+    window.scrollTo(0, 0);
 }
 
 // Questions Page ------------------------------------------------------------------------------------------------
@@ -392,6 +397,7 @@ var questionsArray;
 var feedbackArray = [];// Feedback Array. user, department, question, inputType, approval
 
 function loadQuestions() {
+    window.scrollTo(0, 0);
     var webMethod = "../QuestionsService.asmx/GetQuestions";
     $.ajax({
         type: "POST",
