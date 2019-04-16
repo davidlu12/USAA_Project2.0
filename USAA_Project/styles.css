@@ -16,7 +16,7 @@
 }
 
 	.menu a {
-		font-size: small;
+		font-size: medium;
 		color: white;
 	}
 
@@ -56,10 +56,6 @@
 			box-shadow: 1px 1px 5px 5px #32cdf7;
 		}
 
-#thankYouPanel button {
-	padding: 15px;
-}
-
 #logonPanel h1 {
 	color: white;
 }
@@ -98,21 +94,24 @@
 
 #departmentsPanel .row {
 	width: 100%;
-	padding: 15px;
+	padding: 10px;
 	margin: auto;
 }
 
 #departmentsPanel .col {
-	height: 90px;
+	height: 100px;
+	margin:15px;
 }
 
-#departmentsPanel h1, #departmentsPanel h3 {
+#departmentsPanel h1, #departmentsPanel h2 {
 	color: white;
 }
 
 #departmentsPanel button, #departmentsPanel option {
 	background-color: rgb(217, 220, 222);
 	color: #1A3258;
+	font-size:22px;
+	padding: 10px;
 }
 
 #feedbackListPanel table {
@@ -125,6 +124,7 @@
 #feedbackListPanel {
     background-color: #1A3258;
     width: 100%;
+	font-size:larger;
 }
 
 .filteredOptionsTable {
@@ -158,10 +158,26 @@
     background-color:white;
 }
 
-#feedbackListPanel #approvedbutton {
-    color: #1A3258;
-    background-color: transparent;
+#feedbackListPanel #approvedbutton1, #feedbackListPanel #approvedbutton2{
+	color: #1A3258;
+	border: 1px;
+	border-color: white;
+	background-color: transparent;
 }
+
+	#feedbackListPanel #approvedbutton1:hover {
+		text-decoration: underline;
+		border: 1px;
+		border-color: white;
+		box-shadow: none;
+	}
+
+	#feedbackListPanel #approvedbutton2:hover {
+		border: 1px;
+		border-color: white;
+		box-shadow: none;
+	}
+
 
 #feedbackListPanel th {
 	padding: .75rem 1.25rem;
@@ -169,7 +185,9 @@
 	background-color: #1A3258;
 	border-bottom: 1px solid rgba(0,0,0,.125);
 	color: white;
+	font-size:x-large;
 }
+
 
 /*#feedbackListPanel button, #questionsPanel button, #thankYouPanel button{
 	background-color: white;
@@ -185,12 +203,63 @@
 		border: 2px solid #396DC1;
 	}*/
 
-
-#thankYouPanel {
-    text-align: center;
+.questionBox{
+	color:white;
+	width: 100%;
+	font-size:x-large;
 }
 
-	#thankYouPanel h1 {
+	.questionBox th {
+		padding: .75rem 0rem;
+		margin-bottom: 0;
+		border-bottom: 1px solid rgba(0,0,0,.125);
+		color: white;
+		font-size:xx-large;
+	}
+
+	.questionBox tr {
+		padding: .75rem 1.25rem;
+	}
+
+#questionsPanel #submit{
+	text-align: center;
+	margin:20px;
+}
+
+#questionsPanel #submitButton {
+	padding: 15px;
+	font-size:x-large;
+}
+
+.filteredOptionsTable button {
+	margin: 20px 0px 10px 0px;
+	padding: 10px;
+}
+
+.questionBox input[type="text"] {
+	padding: 5px 10px 5px 10px;
+	border-radius: 5px;
+	margin-bottom: 40px;
+	width: 100%;
+}
+
+/*.questionBox tr:empty {
+	display: none;
+	border-style: none;
+}*/
+
+#thankYouPanel {
+	text-align: center;
+}
+
+	#thankYouPanel #thanks {
 		margin: 15% 0px 10% 0px;
 		color: white;
+		font-size:50px;
+		
+	}
+
+	#thankYouPanel button {
+		padding: 15px;
+		font-size: x-large;
 	}
