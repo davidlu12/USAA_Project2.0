@@ -7,6 +7,9 @@
 	width: 100%;
 	padding: 10px;
 	background-color: #1A3258;
+	/*background-image: url(https://i0.wp.com/www.automobileshippingquotes.com/wp-content/uploads/2016/09/PhoenixDowntown.jpg?ssl=1);
+	background-size: cover;
+	background-repeat: no-repeat;*/
 }
 
 .menu {
@@ -36,9 +39,20 @@
 	flex: 1;
 }
 
+/*#logonPanel {
+  background-image: url("/img/panelImg.jpg");
+  background-color: #cccccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}*/
+
 .logonPanel {
 	text-align: center;
 	align-content: center;
+	/*margin-top:14%;*/
 }
 
 	.logonPanel button, button {
@@ -56,9 +70,11 @@
 			box-shadow: 1px 1px 5px 5px #32cdf7;
 		}
 
-#logonPanel h1 {
+#logonPanel h3 {
 	color: white;
+	font-style: italic;
 }
+
 
 .form-signin {
 	width: 100%;
@@ -122,22 +138,22 @@
 }
 
 #feedbackListPanel {
-    background-color: #1A3258;
-    width: 100%;
+	background-color: #1A3258;
+	width: 100%;
 	font-size:larger;
 }
 
 .filteredOptionsTable {
 	background-color: #1A3258;
-    float:left;
-    width: 20%;
-    padding-left: 40px;
-    padding-right: 40px;
+	float:left;
+	width: 20%;
+	padding-left: 40px;
+	padding-right: 40px;
 }
 .dbListTable {
-    float: none;
-    width: 80%;
-    margin: 0;
+	float: none;
+	width: 80%;
+	margin: 0;
 }
 
 #feedbackListPanel .card-header {
@@ -149,13 +165,13 @@
 }
 
 .dbListTitle {
-    overflow: hidden;
-    background-color: #1A3258;
-    border-width: 1px;
+	overflow: hidden;
+	background-color: #1A3258;
+	border-width: 1px;
 }
 
 #feedbackListPanel tbody{
-    background-color:white;
+	background-color:white;
 }
 
 #feedbackListPanel #approvedbutton1, #feedbackListPanel #approvedbutton2{
@@ -183,9 +199,9 @@
 	padding: .75rem 1.25rem;
 	margin-bottom: 0;
 	background-color: #1A3258;
-	border-bottom: 1px solid rgba(0,0,0,.125);
+	border: none;
 	color: white;
-	font-size:x-large;
+	font-size:larger;
 }
 
 
@@ -263,3 +279,9 @@
 		padding: 15px;
 		font-size: x-large;
 	}
+
+#logonPanel #welcome {
+	margin: 30% 0% 20% 0%;
+	font-size: 50px;
+	color: white;
+}
