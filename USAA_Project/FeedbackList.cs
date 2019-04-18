@@ -9,8 +9,10 @@ namespace USAA_Project
     {
         public string reviewer;
         public string department;
+        public string question;
         public int rating;
         public string comment;
         public int approval;
+        public int feedbackId;
     }
 }

@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!--<link rel="stylesheet" href="./feedback.css">-->
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>Feedback List Page</title>
+	<style>
+
+		body {
+			height: 100%;
+		}
+
+		body {
+			display: -ms-flexbox;
+			display: flex;
+			padding-top: 40px;
+			padding-bottom: 40px;
+			background-color: rgba(0,0,0,.125);
+		}
+
+		table {
+			width: 70%;
+			margin-right: 5%;
+			margin: auto;
+			text-align: center;
+			margin-top: 0;
+		}
+
+		.filteredOptionsTable {			
+			background-color: #1A3258;
+		}
+
+		.card-header {
+			color: white;
+		}
+
+		.filter-content {
+			background-color: white;
+		}
+
+		.dbListTitle {
+			overflow: hidden;
+			background-color: white;
+		}
+
+		button {
+			background-color: #1A3258;
+			color: white;
+			border: 2px solid white;
+			border-radius: 5px;
+			font-weight: bold;
+		}
+
+		button:hover {
+			background-color: white;
+			color: #1A3258;
+			border: 2px solid #1A3258;
+		}
+
+		th {
+			padding: .75rem 1.25rem;
+			margin-bottom: 0;
+			background-color: #1A3258;
+			border-bottom: 1px solid rgba(0,0,0,.125);
+			color: white;
+		}		
+
+	</style>
+	<script>
+		$('input[type="checkbox"]').on('change', function () {
+			$('input[name="' + this.name + '"]').not(this).prop('checked', false);
+		});
+		var listsArray;
+
+		//this function grabs lists and loads our list window
+		function LoadList() {
+            var webMethod = "../FeedbackListServices.asmx/GetList";
+            var parameters = "{\"departmentFilter\":\"" + encodeURI(departmentFilter) + "\",\"ratingFilter\":\"" + encodeURI(ratingFilter) + "\",\"approvalFilter\":\"" + encodeURI(approvalFilter)+"\"}";
+			$.ajax({
+				type: "POST",
+                url: webMethod,
+                data: parameters,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (msg) {
+					if (msg.d.length > 0) {
+						//let's put our accounts that we get from the
+						//server into our accountsArray variable
+						//so we can use them in other functions as well
+						listsArray = msg.d;
+						//this clears out the div that will hold our account info
+
+                        $("#feedbackListItemBox").empty();
+                        $("#feedbackListItemBox").append("<thead><tr class='dbListTitle '>" +
+							"<th>Reviewer</th>"+
+							"<th>Department</th>"+
+							"<th>Rating</th>"+ 
+							"<th>Comment</th>"+
+							"<th>Approval</th>"+
+							"<th><button onclick='myFunction()'>Print...</button></th></tr></thead>"
+						);
+						for (var i = 0; i < listsArray.length; i++) {
+							//we grab on to a specific html element in jQuery
+							//by using a  # followed by that element's id.
+							var acct;
+							acct = "<tbody><tr>"+ "<td>" + listsArray[i].reviewer + "</td>" +
+								"<td>" + listsArray[i].department + "</td>" +
+								"<td>" + listsArray[i].rating + "</td>" +
+								"<td>" + listsArray[i].comment + "</td>"                                 
+
+                            var acctUserHidden;
+                            acctUserHidden = "<tbody><tr>" + "<td> ****** </td>" +
+                                "<td>" + listsArray[i].department + "</td>" +
+                                "<td>" + listsArray[i].rating + "</td>" +
+                                "<td>" + listsArray[i].comment + "</td>" 
+
+                            var approvalChecked;
+                            approvalChecked = "<td>" + "<button onclick='EditFeedback(" + listsArray[i].feedbackId + ")' disabled>Approved</button>" + "</td>" + "</tr></tbody>"
+                            var approvalNotChecked;
+                            approvalNotChecked = "<td>" + "<button onclick='EditFeedback(" + listsArray[i].feedbackId + ")' >Click to Approve</button>" + "</td>" + "</tr></tbody>"
+
+
+                            if (reviewerFilter == 1) {
+                                if (listsArray[i].approval == 1) {
+                                    $("#feedbackListItemBox").append(
+                                        //anything we throw at our panel in the form of text
+                                        //will be added to the contents of that panel.  Here
+                                        acctUserHidden + approvalChecked
+                                    );
+                                }
+                                else {
+                                    $("#feedbackListItemBox").append(
+                                        //anything we throw at our panel in the form of text
+                                        //will be added to the contents of that panel.  Here
+                                        acctUserHidden + approvalNotChecked
+                                    );
+                                }
+                            } else if (listsArray[i].approval == 1) {
+                                $("#feedbackListItemBox").append(
+                                    //anything we throw at our panel in the form of text
+                                    //will be added to the contents of that panel.  Here
+                                    acct + approvalChecked
+                                );
+                            }
+                            else {
+                                $("#feedbackListItemBox").append(
+                                    //anything we throw at our panel in the form of text
+                                    //will be added to the contents of that panel.  Here
+                                    acct + approvalNotChecked
+                                );
+                            }
+                            
+
+						}
+					}
+					//we're showing the account window, so let's track that...
+					accountWindowShowing = true;
+					//...because the ShowMenu function behaves differently depending on
+					//if the account window is showing or not
+					//ShowMenu();
+				},
+				error: function (e) {
+					alert("boo...");
+				}
+			});
+        }
+
+        //ajax to send the edits of an item to the server -------------------------------------------------------------------------------------------------------------------------
+        function EditFeedback(feedbackId) {
+            var webMethod = "../FeedbackListServices.asmx/ApproveFeedback";
+            var parameters = "{\"id\":\"" + encodeURI(feedbackId) + "\",\"approval\":\"" + "1"+ "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    //showPanel('listPanel');
+                    LoadList();
+                },
+                error: function (e) {
+                    alert("boo...");
+                }
+            });
+        }
+
+        // Print screen function -------------------------------------------------------------------------------------------------------------------------------------------
+		function myFunction() {
+			window.print();
+        }
+
+        // Filter functions ------------------------------------------------------------------------------------------------------------------------------------------------
+        var reviewerFilter;
+        var departmentFilter;
+        var ratingFilter;
+        var approvalFilter;
+
+        function hideReviewer() {
+            document.getElementById("hideReviewerCB").checked = true;
+            document.getElementById("unhideCB").checked = false;
+            reviewerFilter = 1;
+            LoadList()
+        }
+        function unhideReviewer() {
+            document.getElementById("hideReviewerCB").checked = false;
+            document.getElementById("unhideCB").checked = true;
+            reviewerFilter = 0;
+            LoadList()
+        }
+        function accountingFilter() {
+            document.getElementById("accountingCB").checked = true;
+            document.getElementById("iTCB").checked = false;
+            departmentFilter = "Accounting";
+            LoadList()
+        }
+        function ITFilter() {
+            document.getElementById("accountingCB").checked = false;
+            document.getElementById("iTCB").checked = true;
+            departmentFilter = "IT";
+            LoadList()
+        }
+        function rating1Filter() {
+            document.getElementById("1CB").checked = true;
+            document.getElementById("2CB").checked = false;
+            document.getElementById("3CB").checked = false;
+            document.getElementById("4CB").checked = false;
+            document.getElementById("5CB").checked = false;
+            ratingFilter = 1;
+            LoadList()
+        }
+        function rating2Filter() {
+            document.getElementById("1CB").checked = false;
+            document.getElementById("2CB").checked = true;
+            document.getElementById("3CB").checked = false;
+            document.getElementById("4CB").checked = false;
+            document.getElementById("5CB").checked = false;
+            ratingFilter = 2;
+            LoadList()
+        }
+        function rating3Filter() {
+            document.getElementById("1CB").checked = false;
+            document.getElementById("2CB").checked = false;
+            document.getElementById("3CB").checked = true;
+            document.getElementById("4CB").checked = false;
+            document.getElementById("5CB").checked = false;
+            ratingFilter = 3;
+            LoadList()
+        }
+        function rating4Filter() {
+            document.getElementById("1CB").checked = false;
+            document.getElementById("2CB").checked = false;
+            document.getElementById("3CB").checked = false;
+            document.getElementById("4CB").checked = true;
+            document.getElementById("5CB").checked = false;
+            ratingFilter = 4;
+            LoadList()
+        }
+        function approvedFilter() {
+            document.getElementById("approvedCB").checked = true;
+            document.getElementById("notApprovedCB").checked = false;
+            approvalFilter = 1;
+            LoadList()
+        }
+        function notApprovedFilter() {
+            document.getElementById("approvedCB").checked = false;
+            document.getElementById("notApprovedCB").checked = true;
+            approvalFilter = 0;
+            LoadList()
+        }
+        function filterReset() {
+            document.getElementById("1CB").checked = false;
+            document.getElementById("2CB").checked = false;
+            document.getElementById("3CB").checked = false;
+            document.getElementById("4CB").checked = false;
+            document.getElementById("hideReviewerCB").checked = true;
+            document.getElementById("unhideCB").checked = false;
+            document.getElementById("accountingCB").checked = false;
+            document.getElementById("iTCB").checked = false;
+            document.getElementById("approvedCB").checked = false;
+            document.getElementById("notApprovedCB").checked = true;
+            reviewerFilter = 1;
+            departmentFilter = "null";
+            ratingFilter = "null";
+            approvalFilter = 0;
+            LoadList()
+        }
+
+
+	</script>
+</head>
+<body onload="filterReset()">
+	<div class="filteredOptionsTable col-2">
+		<article class="card-group-item">
+			<header class="card-header">
+				<h6 class="title">Reviewer </h6>
+			</header>
+			<div class="filter-content">
+				<div class="card-body">
+					<form>
+						<label class="form-check">
+							<input class="form-check-input" id="hideReviewerCB" type="checkbox" value="HideReviewer" onclick="hideReviewer()" checked>***Hide reviewer*** <br>
+							<input class="form-check-input" id="unhideCB" type="checkbox" value="" onclick="unhideReviewer()" >Unhide<br>
+						</label>  <!-- form-check.// -->
+					</form>
+				</div> <!-- card-body.// -->
+			</div>
+		</article>
+		<article class="card-group-item">
+			<header class="card-header">
+				<h6 class="title">Department </h6>
+			</header>
+			<div class="filter-content">
+				<div class="card-body">
+					<form>
+						<label class="form-check">
+							<input class="form-check-input" id="accountingCB" type="checkbox" value="" onclick="accountingFilter()">Accounting<br>
+							<input class="form-check-input" id="iTCB" type="checkbox" value="" onclick="ITFilter()">IT<br>
+						</label>  <!-- form-check.// -->
+					</form>
+				</div> <!-- card-body.// -->
+			</div>
+		</article>
+		<article class="card-group-item">
+			<header class="card-header">
+				<h6 class="title">Rating </h6>
+			</header>
+			<div class="filter-content">
+				<div class="card-body">
+					<form>
+						<label class="form-check">
+							<input class="form-check-input" id="1CB" type="checkbox" value="1" onclick="rating1Filter()">1<br>
+							<input class="form-check-input" id="2CB" type="checkbox" value="2" onclick="rating2Filter()">2<br>
+							<input class="form-check-input" id="3CB" type="checkbox" value="3" onclick="rating3Filter()">3<br>
+							<input class="form-check-input" id="4CB" type="checkbox" value="4" onclick="rating4Filter()">4<br>
+						</label>  <!-- form-check.// -->
+					</form>
+
+				</div> <!-- card-body.// -->
+			</div>
+		</article>
+		<article class="card-group-item">
+			<header class="card-header">
+				<h6 class="title">Approval </h6>
+			</header>
+			<div class="filter-content">
+				<div class="card-body">
+					<form>
+						<label class="form-check">
+							<input class="form-check-input" id="approvedCB" type="checkbox" value="1" onclick="approvedFilter()">Approved<br>
+							<input class="form-check-input" id="notApprovedCB" type="checkbox" value="0" onclick="notApprovedFilter()" checked>Waiting for approval<br>
+						</label>  <!-- form-check.// -->
+					</form>
+				</div> <!-- card-body.// -->
+			</div>
+		</article>
+		<article class="card-group-item">
+			<header class="card-header">
+                <button onclick="filterReset()">Reset Filter</button>
+			</header>
+		</article>
+	</div>
+	<table class=" table table-hover col-9" id="feedbackListItemBox">
+	</table>
+</body>
+</html>
